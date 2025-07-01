@@ -25,6 +25,9 @@ export const getApiUrl = (endpoint) => {
 // Export the base URL for direct use
 export const BACKEND_URL = API_CONFIG.BASE_URL;
 
+// Export the frontend URL for direct use
+export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173';
+
 // Environment variables for debugging
 export const ENV_INFO = {
   backendUrl: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001',

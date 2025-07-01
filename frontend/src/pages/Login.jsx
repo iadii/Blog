@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BookOpen, Shield, Zap, Users } from 'lucide-react';
+import { BACKEND_URL } from '../config/config';
 
 const Login = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -17,7 +18,7 @@ const Login = () => {
   }, [isAuthenticated, loading, navigate, from]);
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/google';
+    window.location.href = `${BACKEND_URL}/auth/google`;
   };
 
   const benefits = [

@@ -3,6 +3,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
+const FRONTEND_URL = 'http://localhost:5173'; // Centralized frontend URL
 
 // Google OAuth
 router.get('/google',
@@ -20,15 +21,18 @@ router.get('/google/callback',
         );
 
         // Redirect to frontend with token
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-        res.redirect(`${frontendUrl}/auth/success?token=${token}`);
+        res.redirect(`http://localhost:5173/auth/success?token=${token}`);
     }
 );
 
 // Get current user
 router.get('/me', async (req, res) => {
     try {
+        // Debug: Log the Authorization header
+        console.log('Authorization header:', req.header('Authorization'));
         const token = req.header('Authorization')?.replace('Bearer ', '');
+        // Debug: Log the extracted token
+        console.log('Extracted token:', token);
         
         if (!token) {
             return res.status(401).json({ message: 'No token provided' });

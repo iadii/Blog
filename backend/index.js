@@ -4,9 +4,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const passport = require('passport');
-const authRoutes = require('./routes/authRoutes');
-const blogRoutes = require('./routes/blogRoutes');
-const path = require('path');
 
 dotenv.config();
 const app = express();
@@ -15,11 +12,25 @@ const app = express();
 require('./config/passport')(passport);
 
 // CORS configuration with environment variables
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://blog-one-hazel-22.vercel.app'
+];
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
+
 app.use(cors(corsOptions));
 
 // Middleware
@@ -37,13 +48,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-// Handle all other routes by serving the index.html file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
+// Routes
+const authRoutes = require('./routes/authRoutes');
+const blogRoutes = require('./routes/blogRoutes');
 
 app.use('/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
@@ -70,3 +77,4 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/blogsphere'
 }).catch(err => {
     console.error('❌ MongoDB connection failed:', err);
 });
+
