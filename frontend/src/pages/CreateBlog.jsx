@@ -4,7 +4,7 @@ import { useBlog } from '../context/BlogContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Save, ArrowLeft, FileText, Type, BookOpen } from 'lucide-react';
 import toast from 'react-hot-toast';
-
+import Footer from '../components/Footer';
 const CreateBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -92,7 +92,7 @@ const CreateBlog = () => {
                 </span>
               </div>
             </div>
-            {/* Content Editor */}
+            {/* Content Editor Card */}
             <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6">
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="w-5 h-5 text-teal-400" />
@@ -114,12 +114,12 @@ const CreateBlog = () => {
                 rows={6}
               />
             </div>
-            {/* Publish Button (below content) */}
-            <div className="w-full flex justify-end">
+            {/* Publish Button OUTSIDE the card, aligned right */}
+            <div className="w-full flex justify-end mt-4">
               <button
                 type="submit"
                 disabled={isSubmitting || !title.trim() || !content.trim()}
-                className="bg-teal-500 hover:bg-teal-400 text-white font-semibold rounded-xl px-8 py-3 text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                className="bg-teal-500 hover:bg-teal-400 text-white font-semibold rounded-xl px-8 py-3 text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg h-fit"
               >
                 {isSubmitting ? (
                   <LoadingSpinner size="small" />
@@ -152,8 +152,11 @@ const CreateBlog = () => {
           </div>
         </div>
       </div>
+      {/* <Footer/> */}
     </div>
+    
   );
+
 };
 
 export default CreateBlog;
