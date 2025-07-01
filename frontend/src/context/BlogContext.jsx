@@ -1,0 +1,112 @@
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useAuth } from './AuthContext';
+import { getApiUrl, API_CONFIG } from '../config/config';
+
+const BlogContext = createContext();
+
+export const useBlog = () => {
+  const context = useContext(BlogContext);
+  if (!context) {
+    throw new Error('useBlog must be used within a BlogProvider');
+  }
+  return context;
+};
+
+export const BlogProvider = ({ children }) => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentBlog, setCurrentBlog] = useState(null);
+  const { isAuthenticated } = useAuth();
+
+  // Fetch all blogs
+  const fetchBlogs = useCallback(async () => {
+    if (!isAuthenticated) return;
+    
+    setLoading(true);
+    try {
+      const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.ALL));
+      setBlogs(response.data);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      toast.error('Failed to fetch blogs');
+    } finally {
+      setLoading(false);
+    }
+  }, [isAuthenticated]);
+
+  // Fetch single blog
+  const fetchBlog = useCallback(async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.SINGLE(id)));
+      setCurrentBlog(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching blog:', error);
+      toast.error('Failed to fetch blog');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Create new blog
+  const createBlog = useCallback(async (blogData) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.CREATE), blogData);
+      setBlogs(prev => [response.data, ...prev]);
+      toast.success('Blog created successfully!');
+      return response.data;
+    } catch (error) {
+      console.error('Error creating blog:', error);
+      toast.error('Failed to create blog');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Delete blog
+  const deleteBlog = useCallback(async (id) => {
+    try {
+      await axios.delete(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.DELETE(id)));
+      setBlogs(prev => prev.filter(blog => blog._id !== id));
+      toast.success('Blog deleted successfully!');
+      return true;
+    } catch (error) {
+      console.error('Error deleting blog:', error);
+      toast.error('Failed to delete blog');
+      return false;
+    }
+  }, []);
+
+  // Fetch blogs when user is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchBlogs();
+    } else {
+      setBlogs([]);
+      setCurrentBlog(null);
+    }
+  }, [isAuthenticated, fetchBlogs]);
+
+  const value = useMemo(() => ({
+    blogs,
+    currentBlog,
+    loading,
+    fetchBlogs,
+    fetchBlog,
+    createBlog,
+    deleteBlog,
+    setCurrentBlog,
+  }), [blogs, currentBlog, loading, fetchBlogs, fetchBlog, createBlog, deleteBlog]);
+
+  return (
+    <BlogContext.Provider value={value}>
+      {children}
+    </BlogContext.Provider>
+  );
+};
