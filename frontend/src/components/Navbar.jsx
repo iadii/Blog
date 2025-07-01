@@ -55,7 +55,7 @@ const Navbar = () => {
             <div className="w-10 h-10 bg-black-950 rounded-xl flex items-center justify-center shadow-md">
               <BookOpen className="w-6 h-6 text-teal-400 drop-shadow-glow" />
             </div>
-            <span className="tracking-tight">BlogSphere</span>
+            <span className="font-serenade text-2xl font-bold tracking-tight">Serenade & Ink</span>
           </Link>
 
           {/* Center nav links (optional) */}

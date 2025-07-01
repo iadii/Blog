@@ -25,7 +25,7 @@ const Footer = () => (
         <div className="flex flex-col items-center md:items-start gap-3">
           <div className="flex items-center gap-3">
             <BookOpen className="w-8 h-8 text-teal-400 drop-shadow-glow" />
-            <span className="text-2xl font-bold text-white drop-shadow-glow">BlogSphere</span>
+            <span className="font-serenade text-2xl font-bold text-white drop-shadow-glow">Serenade & Ink</span>
           </div>
           <div className="flex gap-4 mt-2">
             {socials.map((s) => (
@@ -44,7 +44,7 @@ const Footer = () => (
               </a>
             ))}
           </div>
-          <p className="text-white/40 text-sm mt-2 md:mt-0">© {new Date().getFullYear()} BlogSphere. Crafted for writers and thinkers.</p>
+          <p className="text-white/40 text-sm mt-2 md:mt-0">© {new Date().getFullYear()} Serenade & Ink. Crafted for writers and dreamers.</p>
           <p className="text-white/30 text-xs italic mt-1">Dreamed, designed, and crafted with love by iadii — for every soul who writes beneath the stars.</p>
         </div>
       </div>

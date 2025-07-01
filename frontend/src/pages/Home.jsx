@@ -154,24 +154,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* Testimonials Section (glassmorphism, animated) */}
-        <section className="py-24 bg-black-900/30 backdrop-blur-xl">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">What People Are Saying</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((t, idx) => (
-                <div key={idx} className="card bg-white/10 border-white/20 backdrop-blur-xl flex flex-col items-center text-center shadow-glow">
-                  <img src={t.avatar} alt={t.name} className="w-20 h-20 rounded-full border-4 border-teal-400 mb-4 object-cover shadow-lg" />
-                  <p className="text-lg text-white/90 italic mb-4">“{t.quote}”</p>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-5 h-5 text-yellow-400" />
-                    <span className="text-white font-bold">{t.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
         {/* Footer */}
         <Footer />
       </div>

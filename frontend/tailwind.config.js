@@ -61,6 +61,7 @@ export default {
         sans: ['Inter var', 'system-ui', 'sans-serif'],
         display: ['Clash Display', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        'serenade': ['"Parisienne"', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

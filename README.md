@@ -1,6 +1,6 @@
-# BlogSphere
+# Serenade & Ink
 
-A modern, full-stack blog platform with a beautiful glassmorphism UI, authentication, and a seamless writing experience. Built with React (Vite, Tailwind), Node.js, Express, and MongoDB.
+A modern, full-stack blog platform for those who write as if serenading the stars, with every line a song of devotion. Built with React (Vite, Tailwind), Node.js, Express, and MongoDB.
 
 ---
 

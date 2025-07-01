@@ -224,21 +224,26 @@ const Profile = () => {
         <div className="space-y-6">
           {activeTab === 'overview' && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Recent Activity */}
-              <div className="lg:col-span-1">
-                <div className="card bg-black-800/30 border-black-700 min-h-[240px] flex flex-col">
+              {/* Recent Activity: Only Recent Blogs, no Recent Edits */}
+              <div className="lg:col-span-1 flex flex-col gap-6">
+                {/* Recent Blogs */}
+                <div className="card bg-black-800/30 border-black-700 h-[420px] flex flex-col">
                   <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                     <Activity className="w-4 h-4 text-accent-400" />
-                    Recent Activity
+                    Recent Blogs
                   </h3>
-                  <div className="space-y-3 flex-1">
-                    {recentBlogs.slice(0, 3).map((blog, index) => (
+                  <div className="space-y-3 flex-1 overflow-y-auto pr-1">
+                    {recentBlogs.slice(0, 5).map((blog, index) => (
                       <div key={blog._id} className="flex items-center gap-3 p-2 bg-black-800/50 rounded-lg border border-black-700">
                         <div className="w-8 h-8 bg-gradient-to-r from-accent-500/20 to-gold-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
                           <FileText className="w-4 h-4 text-accent-400" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-white font-medium text-sm truncate">{blog.title}</h4>
+                          <h4 className="text-white font-medium text-sm truncate flex items-center gap-2">
+                            <Link to={`/blog/${blog._id}`} className="hover:underline text-accent-300" title="View blog">
+                              {blog.title}
+                            </Link>
+                          </h4>
                           <p className="text-black-400 text-xs">{formatDate(blog.createdAt)}</p>
                         </div>
                         <div className="text-right text-xs text-black-400 flex-shrink-0">
@@ -256,56 +261,82 @@ const Profile = () => {
                 </div>
               </div>
 
-              {/* Writing Goals */}
-              <div className="lg:col-span-1">
-                <div className="card bg-black-800/30 border-black-700 min-h-[240px] flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-gold-400" />
-                    Writing Goals
-                  </h3>
-                  <div className="space-y-4 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-black-300 text-sm">Monthly Goal</span>
-                        <span className="text-white font-medium">5 blogs</span>
+              {/* Writing Goals: Monthly Goal and Streaks, same height */}
+              <div className="lg:col-span-1 flex flex-col gap-6">
+                <div className="flex flex-col gap-6 h-full" style={{height: '420px'}}>
+                  {/* Monthly Goal */}
+                  <div className="card bg-black-800/30 border-black-700 flex-1 flex flex-col min-h-0">
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-gold-400" />
+                      Monthly Goal
+                    </h3>
+                    <div className="space-y-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-black-300 text-sm">Monthly Goal</span>
+                          <span className="text-white font-medium">5 blogs</span>
+                        </div>
+                        <div className="w-full bg-black-700 rounded-full h-2 mt-2">
+                          <div 
+                            className="bg-gradient-to-r from-accent-500 to-gold-500 h-2 rounded-full transition-all duration-300"
+                            style={{ width: `${Math.min((thisMonthBlogs / 5) * 100, 100)}%` }}
+                          ></div>
+                        </div>
                       </div>
-                      <div className="w-full bg-black-700 rounded-full h-2 mt-2">
-                        <div 
-                          className="bg-gradient-to-r from-accent-500 to-gold-500 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${Math.min((thisMonthBlogs / 5) * 100, 100)}%` }}
-                        ></div>
-                      </div>
+                      <p className="text-sm text-black-400">{thisMonthBlogs}/5 blogs completed</p>
                     </div>
-                    <p className="text-sm text-black-400">{thisMonthBlogs}/5 blogs completed</p>
+                  </div>
+                  {/* Streaks (placeholder) */}
+                  <div className="card bg-black-800/30 border-black-700 flex-1 flex flex-col min-h-0">
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                      <BarChart3 className="w-4 h-4 text-accent-400" />
+                      Writing Streaks
+                    </h3>
+                    <div className="flex-1 flex items-center justify-center text-black-400 text-sm">
+                      Coming soon
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Achievements */}
-              <div className="lg:col-span-1">
-                <div className="card bg-black-800/30 border-black-700 min-h-[240px] flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <Star className="w-4 h-4 text-purple-400" />
-                    Achievements
-                  </h3>
-                  <div className="space-y-3 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-3 p-2 bg-accent-500/10 rounded-lg">
-                        <Award className="w-4 h-4 text-accent-400" />
-                        <span className="text-sm text-white">First Blog Published</span>
+              {/* Achievements: Milestones and Badges, same height */}
+              <div className="lg:col-span-1 flex flex-col gap-6">
+                <div className="flex flex-col gap-6 h-full" style={{height: '420px'}}>
+                  {/* Milestones */}
+                  <div className="card bg-black-800/30 border-black-700 flex-1 flex flex-col min-h-0">
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                      <Star className="w-4 h-4 text-purple-400" />
+                      Milestones
+                    </h3>
+                    <div className="space-y-3 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-3 p-2 bg-accent-500/10 rounded-lg">
+                          <Award className="w-4 h-4 text-accent-400" />
+                          <span className="text-sm text-white">First Blog Published</span>
+                        </div>
+                        {blogs.length >= 5 && (
+                          <div className="flex items-center gap-3 p-2 bg-gold-500/10 rounded-lg">
+                            <Award className="w-4 h-4 text-gold-400" />
+                            <span className="text-sm text-white">5 Blogs Milestone</span>
+                          </div>
+                        )}
+                        {totalWords >= 1000 && (
+                          <div className="flex items-center gap-3 p-2 bg-purple-500/10 rounded-lg">
+                            <Award className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm text-white">1000+ Words Writer</span>
+                          </div>
+                        )}
                       </div>
-                      {blogs.length >= 5 && (
-                        <div className="flex items-center gap-3 p-2 bg-gold-500/10 rounded-lg">
-                          <Award className="w-4 h-4 text-gold-400" />
-                          <span className="text-sm text-white">5 Blogs Milestone</span>
-                        </div>
-                      )}
-                      {totalWords >= 1000 && (
-                        <div className="flex items-center gap-3 p-2 bg-purple-500/10 rounded-lg">
-                          <Award className="w-4 h-4 text-purple-400" />
-                          <span className="text-sm text-white">1000+ Words Writer</span>
-                        </div>
-                      )}
+                    </div>
+                  </div>
+                  {/* Badges (placeholder) */}
+                  <div className="card bg-black-800/30 border-black-700 flex-1 flex flex-col min-h-0">
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-pink-400" />
+                      Badges
+                    </h3>
+                    <div className="flex-1 flex items-center justify-center text-black-400 text-sm">
+                      Coming soon
                     </div>
                   </div>
                 </div>
