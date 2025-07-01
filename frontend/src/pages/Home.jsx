@@ -7,29 +7,29 @@ const testimonials = [
   {
     name: 'Ava Carter',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-    quote: 'BlogSphere made me fall in love with writing again. The design is stunning and the experience is seamless!'
+    quote: 'Serenade & Ink rekindled my muse—each word a dance, each page a gentle dawn. Here, my heart finds its melody.'
   },
   {
     name: 'Liam Smith',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    quote: 'I love the live preview and the beautiful UI. It feels like writing in a premium app.'
+    quote: 'To write here is to paint with starlight. The beauty of the ink and the ease of the flow—pure poetry in motion.'
   },
   {
     name: 'Sophia Lee',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    quote: 'The best blogging platform for creators who care about aesthetics and usability.'
+    quote: 'A haven for dreamers—Serenade & Ink is where my stories take flight on wings of wonder.'
   }
 ];
 
 const steps = [
   {
-    icon: <UserCircle className="w-8 h-8 text-teal-400" />, title: 'Sign Up', desc: 'Create your free account in seconds.'
+    icon: <UserCircle className="w-8 h-8 text-teal-400" />, title: 'Whisper Your Name', desc: 'Let your soul sign in, and the universe will know you.'
   },
   {
-    icon: <Feather className="w-8 h-8 text-sky-400" />, title: 'Write', desc: 'Craft beautiful blogs with our editor.'
+    icon: <Feather className="w-8 h-8 text-sky-400" />, title: 'Weave Your Verse', desc: 'Spin your tales, let your thoughts flow like rivers of ink.'
   },
   {
-    icon: <CheckCircle className="w-8 h-8 text-green-400" />, title: 'Publish', desc: 'Share your thoughts with the world.'
+    icon: <CheckCircle className="w-8 h-8 text-green-400" />, title: 'Release to the Stars', desc: 'Send your words into the night, where kindred spirits await.'
   }
 ];
 
@@ -38,21 +38,21 @@ const featuredBlogs = [
     title: 'How to Write a Viral Blog Post',
     author: 'Ava Carter',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-    excerpt: 'Discover the secrets to writing content that spreads like wildfire across the internet.',
+    excerpt: 'Unveil the alchemy of words that ripple through hearts and echo across distant shores.',
     color: 'from-teal-400 via-white to-white'
   },
   {
     title: 'The Art of Minimalist Writing',
     author: 'Liam Smith',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    excerpt: 'Learn how to say more with less and captivate your readers with simplicity.',
+    excerpt: 'Whisper with purpose—let silence and simplicity cradle your every phrase.',
     color: 'from-sky-400 via-white to-white'
   },
   {
     title: 'Building a Daily Writing Habit',
     author: 'Sophia Lee',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    excerpt: 'Tips and tricks to help you write every day and never run out of ideas.',
+    excerpt: 'Let the dawn greet your pen, and let habit become your muse\'s gentle hand.',
     color: 'from-cyan-400 via-white to-white'
   }
 ];
@@ -79,24 +79,24 @@ const Home = () => {
           {/* Left: Text */}
           <div className="flex-1 flex flex-col items-start md:items-start text-left">
             <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
-              BlogSphere
+              Serenade & Ink
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-12 max-w-xl font-normal">
-              Your personal blogging universe to create, organize, and share your thoughts beautifully.
+              Where every thought is a constellation, and every story a song—compose your universe, let your words shimmer and belong.
             </p>
             {isAuthenticated ? (
               <Link
                 to="/dashboard"
                 className="px-8 py-4 rounded-lg bg-teal-500 text-white font-semibold text-lg shadow hover:bg-teal-400 transition"
               >
-                Go to Dashboard
+                Enter Your Sanctuary
               </Link>
             ) : (
               <Link
                 to="/login"
                 className="px-8 py-4 rounded-lg bg-teal-500 text-white font-semibold text-lg shadow hover:bg-teal-400 transition"
               >
-                Get Started
+                Begin Your Serenade
               </Link>
             )}
           </div>
@@ -113,7 +113,7 @@ const Home = () => {
         {/* Featured Blogs Section (complex, dynamic cards) */}
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-white mb-12 text-center">Featured Blogs</h2>
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">Featured Verses</h2>
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 overflow-visible px-2 md:px-8">
               {featuredBlogs.map((blog, idx) => (
                 <div
@@ -127,7 +127,7 @@ const Home = () => {
                   <h3 className="text-xl font-bold text-black-900 mb-2 mt-8 line-clamp-2">{blog.title}</h3>
                   <p className="text-black-700 mb-4 line-clamp-3">{blog.excerpt}</p>
                   <div className="flex items-center gap-2 mt-auto">
-                    <span className="text-sm text-black-500 font-semibold">By {blog.author}</span>
+                    <span className="text-sm text-black-500 font-semibold">Penned by {blog.author}</span>
                   </div>
                   <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-teal-400/30 to-white/0 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
                 </div>
@@ -138,7 +138,7 @@ const Home = () => {
         {/* How it Works Section (overlapping cards) */}
         <section className="py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">Get Started in 3 Steps</h2>
+            <h2 className="text-3xl font-bold text-white mb-10 text-center">Compose in Three Heartbeats</h2>
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
               {steps.map((step, idx) => (
                 <div
@@ -149,6 +149,21 @@ const Home = () => {
                   <div className="mb-4">{step.icon}</div>
                   <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
                   <p className="text-white/80">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* Testimonials Section (poetic) */}
+        <section className="py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-3xl font-bold text-white mb-10 text-center">Echoes from Fellow Dreamers</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((t, idx) => (
+                <div key={idx} className="bg-white/10 border-white/20 backdrop-blur-xl rounded-2xl p-8 flex flex-col items-center text-center shadow-glow">
+                  <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-teal-400/40" />
+                  <blockquote className="text-white/80 italic mb-4">“{t.quote}”</blockquote>
+                  <span className="text-white/60 font-semibold">— {t.name}</span>
                 </div>
               ))}
             </div>
