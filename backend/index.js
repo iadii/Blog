@@ -4,6 +4,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const passport = require('passport');
+const authRoutes = require('./routes/authRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const path = require('path');
 
 dotenv.config();
 const app = express();
@@ -34,9 +37,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
-const authRoutes = require('./routes/authRoutes');
-const blogRoutes = require('./routes/blogRoutes');
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Handle all other routes by serving the index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 app.use('/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
