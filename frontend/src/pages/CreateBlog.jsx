@@ -64,7 +64,7 @@ const CreateBlog = () => {
             <div className="w-12 h-12 bg-black-900 rounded-xl flex items-center justify-center shadow-md">
               <BookOpen className="w-6 h-6 text-teal-400 drop-shadow-glow" />
             </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Create Blog</h1>
+            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Weave a New Verse</h1>
           </div>
         </div>
         {/* Main Content: Two-column layout on desktop, stacked on mobile */}
@@ -75,14 +75,14 @@ const CreateBlog = () => {
             <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6 mb-2">
               <label htmlFor="title" className="text-lg font-bold text-white flex items-center gap-2 mb-2">
                 <Type className="w-5 h-5 text-teal-400" />
-                Title
+                Title of Your Song
               </label>
               <input
                 id="title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter title..."
+                placeholder="Let your title glimmer..."
                 className="w-full bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-xl font-bold text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
                 maxLength={100}
               />
@@ -124,7 +124,7 @@ const CreateBlog = () => {
                 {isSubmitting ? (
                   <LoadingSpinner size="small" />
                 ) : null}
-                <span>{isSubmitting ? 'Publishing...' : 'Publish'}</span>
+                <span>{isSubmitting ? 'Sending to the Garden...' : 'Release Your Verse'}</span>
               </button>
             </div>
           </form>
@@ -147,7 +147,7 @@ const CreateBlog = () => {
                 </p>
               </div>
             ) : (
-              <div className="flex-1 flex items-center justify-center text-white/40 italic text-sm">Start typing to see a live preview...</div>
+              <div className="flex-1 flex items-center justify-center text-white/40 italic text-sm">Let your muse guide your hand, and watch your words bloom...</div>
             )}
           </div>
         </div>

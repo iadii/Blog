@@ -12,47 +12,53 @@ const testimonials = [
   {
     name: 'Liam Smith',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    quote: 'To write here is to paint with starlight. The beauty of the ink and the ease of the flow—pure poetry in motion.'
+    quote: 'To write here is to paint with moonlight. The beauty of the ink and the ease of the flow—pure poetry in motion.'
   },
   {
     name: 'Sophia Lee',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    quote: 'A haven for dreamers—Serenade & Ink is where my stories take flight on wings of wonder.'
+    quote: 'A haven for dreamers—Serenade & Ink is where my stories bloom on wings of wonder.'
   }
 ];
 
 const steps = [
   {
-    icon: <UserCircle className="w-8 h-8 text-teal-400" />, title: 'Whisper Your Name', desc: 'Let your soul sign in, and the universe will know you.'
+    icon: <UserCircle className="w-8 h-8 text-teal-400" />, 
+    title: 'Whisper Your Name', 
+    desc: 'Let your soul sign in, and the garden will know you.'
   },
   {
-    icon: <Feather className="w-8 h-8 text-sky-400" />, title: 'Weave Your Verse', desc: 'Spin your tales, let your thoughts flow like rivers of ink.'
+    icon: <Feather className="w-8 h-8 text-sky-400" />, 
+    title: 'Weave Your Verse', 
+    desc: 'Spin your tales, let your thoughts flow like gentle streams of ink.'
   },
   {
-    icon: <CheckCircle className="w-8 h-8 text-green-400" />, title: 'Release to the Stars', desc: 'Send your words into the night, where kindred spirits await.'
+    icon: <CheckCircle className="w-8 h-8 text-green-400" />, 
+    title: 'Release to the Garden', 
+    desc: 'Send your words into the gentle night, where kindred spirits await.'
   }
 ];
 
 const featuredBlogs = [
   {
-    title: 'How to Write a Viral Blog Post',
+    title: 'The Alchemy of Viral Verse',
     author: 'Ava Carter',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-    excerpt: 'Unveil the alchemy of words that ripple through hearts and echo across distant shores.',
+    excerpt: 'Unveil the sacred dance of words that ripple through hearts and echo across distant shores, where every syllable becomes a flower.',
     color: 'from-teal-400 via-white to-white'
   },
   {
-    title: 'The Art of Minimalist Writing',
+    title: 'Whispers of Minimalist Grace',
     author: 'Liam Smith',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    excerpt: 'Whisper with purpose—let silence and simplicity cradle your every phrase.',
+    excerpt: 'Let silence and simplicity cradle your every phrase—where less becomes more, and every breath between words speaks volumes.',
     color: 'from-sky-400 via-white to-white'
   },
   {
-    title: 'Building a Daily Writing Habit',
+    title: 'The Sacred Ritual of Daily Creation',
     author: 'Sophia Lee',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    excerpt: 'Let the dawn greet your pen, and let habit become your muse\'s gentle hand.',
+    excerpt: 'Let the dawn greet your pen, and let habit become your muse\'s gentle hand, guiding you through the garden of inspiration.',
     color: 'from-cyan-400 via-white to-white'
   }
 ];
@@ -82,7 +88,7 @@ const Home = () => {
               Serenade & Ink
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-12 max-w-xl font-normal">
-              Where every thought is a constellation, and every story a song—compose your universe, let your words shimmer and belong.
+              Where every thought is a flower, and every story a song—compose your garden, let your words bloom and belong.
             </p>
             {isAuthenticated ? (
               <Link
@@ -162,7 +168,7 @@ const Home = () => {
               {testimonials.map((t, idx) => (
                 <div key={idx} className="bg-white/10 border-white/20 backdrop-blur-xl rounded-2xl p-8 flex flex-col items-center text-center shadow-glow">
                   <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-teal-400/40" />
-                  <blockquote className="text-white/80 italic mb-4">“{t.quote}”</blockquote>
+                  <blockquote className="text-white/80 italic mb-4">"{t.quote}"</blockquote>
                   <span className="text-white/60 font-semibold">— {t.name}</span>
                 </div>
               ))}

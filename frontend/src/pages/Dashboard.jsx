@@ -121,13 +121,9 @@ const Dashboard = () => {
                 >
                   <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
                 </button>
-                <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-                  Welcome back, <span className="text-teal-400">{user?.name}</span>!
-                </h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Your Garden of Verses</h1>
               </div>
-              <p className="text-white/60 text-lg ml-16 lg:ml-20">
-                Manage your personal blog collection
-              </p>
+              <p className="text-black-300 text-lg mb-8">Gaze upon your written flowers, each one a story blooming in the gentle light of your imagination.</p>
             </div>
 
             {/* Quick Actions */}
@@ -296,6 +292,7 @@ const Dashboard = () => {
                             title="Delete blog"
                           >
                             <Trash2 className="w-4 h-4" />
+                            <span className="sr-only">Release to the Night</span>
                           </button>
                         </div>
                       </div>
@@ -352,6 +349,7 @@ const Dashboard = () => {
                               title="Delete blog"
                             >
                               <Trash2 className="w-4 h-4" />
+                              <span className="sr-only">Release to the Night</span>
                             </button>
                           </div>
                         </div>

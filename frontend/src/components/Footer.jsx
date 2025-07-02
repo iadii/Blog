@@ -44,8 +44,8 @@ const Footer = () => (
               </a>
             ))}
           </div>
-          <p className="text-white/40 text-sm mt-2 md:mt-0">© {new Date().getFullYear()} Serenade & Ink. Crafted for writers and dreamers.</p>
-          <p className="text-white/30 text-xs italic mt-1">Dreamed, designed, and crafted with love by iadii — for every soul who writes beneath the stars.</p>
+          <p className="text-white/40 text-sm mt-2 md:mt-0">© {new Date().getFullYear()} Serenade & Ink. Crafted for writers and dreamers beneath the endless sky.</p>
+          <p className="text-white/30 text-xs italic mt-1">Dreamed, designed, and crafted with love by iadii — for every soul who writes beneath the gentle sky and lets their verses bloom.</p>
         </div>
       </div>
     </div>

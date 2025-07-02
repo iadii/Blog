@@ -56,18 +56,16 @@ const Login = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-accent-500 to-gold-500 rounded-xl flex items-center justify-center mr-4">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-4xl font-black gradient-text">BlogSphere</h1>
+              <h1 className="text-4xl font-black gradient-text">Serenade & Ink</h1>
             </div>
             
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
-              Welcome to Your
-              <br />
-              <span className="gradient-text">Personal Blogging Universe</span>
+              Step into Your Sanctuary<br />
+              <span className="gradient-text">Where Every Soul Sings</span>
             </h2>
             
             <p className="text-xl text-black-300 mb-8 leading-relaxed">
-              Join thousands of writers who trust BlogSphere to capture their thoughts, 
-              ideas, and stories in a beautiful, secure environment.
+              Join a gathering of dreamers who trust Serenade & Ink to cradle their thoughts, let their stories bloom, and their ideas dance in a sanctuary woven from moonlight and ink.
             </p>
 
             {/* Benefits */}

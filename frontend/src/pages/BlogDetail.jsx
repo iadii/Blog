@@ -99,10 +99,10 @@ const BlogDetail = () => {
           <div className="w-24 h-24 bg-gradient-to-r from-accent-500/20 to-gold-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <BookOpen className="w-12 h-12 text-accent-400" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-4">Blog Not Found</h1>
-          <p className="text-black-300 mb-6 text-lg">The blog you're looking for doesn't exist or has been deleted.</p>
+          <h1 className="text-3xl font-bold text-white mb-4">Verse Not Found</h1>
+          <p className="text-black-300 mb-6 text-lg">The verse you seek has drifted into the gentle night, or perhaps never graced this garden.</p>
           <Link to="/" className="btn-primary">
-            Back to Home
+            Return to Your Garden
           </Link>
         </div>
       </div>
