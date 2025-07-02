@@ -93,7 +93,3 @@ Serenade-Ink/
 3. Open a Pull Request
 4. Describe your changes and reference issues if any
 
----
-
-## 📄 License
-[MIT](LICENSE) (or your preferred license) 
