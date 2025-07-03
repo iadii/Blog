@@ -23,7 +23,7 @@ A modern, full-stack blog platform for those who write as if serenading the star
 
 ## 🛠️ Project Structure
 ```
-blog/
+Serenade-Ink/
   backend/      # Express + MongoDB API
   frontend/     # React + Vite + Tailwind UI
   ...           # (this README)
@@ -35,8 +35,8 @@ blog/
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
-cd blog
+git clone https://github.com/iadii/Serenade-Ink.git
+cd Serenade-Ink
 ```
 
 ### 2. Backend Setup
@@ -80,7 +80,7 @@ npm install
 
 ## 🗂️ Folder Structure
 ```
-blog/
+Serenade-Ink/
   backend/      # Express API, models, routes, controllers
   frontend/     # React app, components, pages, context
 ```
@@ -93,7 +93,3 @@ blog/
 3. Open a Pull Request
 4. Describe your changes and reference issues if any
 
----
-
-## 📄 License
-[MIT](LICENSE) (or your preferred license) 
