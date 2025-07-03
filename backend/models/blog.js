@@ -10,8 +10,7 @@ const blogSchema = new mongoose.Schema({
         required: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true
     },
     createdAt: {
