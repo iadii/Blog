@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CreateBlog from './pages/CreateBlog';
+import EditBlog from './pages/EditBlog';
 import BlogDetail from './pages/BlogDetail';
 import AuthSuccess from './pages/AuthSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,6 +37,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <CreateBlog />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/blog/:id/edit" 
+                element={
+                  <ProtectedRoute>
+                    <EditBlog />
                   </ProtectedRoute>
                 } 
               />

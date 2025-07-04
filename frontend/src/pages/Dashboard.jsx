@@ -178,59 +178,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Search and Filter Bar */}
-        <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6 mb-12">
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search your blogs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
-              />
-            </div>
-
-            {/* Sort */}
-            <div className="relative">
-              <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5 pointer-events-none" />
-              <div className="relative">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none w-full pl-12 pr-10 bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition font-medium text-base"
-                >
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                  <option value="title">Title</option>
-                </select>
-                {/* Custom dropdown arrow */}
-                <svg className="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-
-            {/* View Mode */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 shadow ${viewMode === 'grid' ? 'bg-teal-500 text-white' : 'bg-black-900/60 text-white/60'}`}
-              >
-                Grid
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 shadow ${viewMode === 'list' ? 'bg-teal-500 text-white' : 'bg-black-900/60 text-white/60'}`}
-              >
-                List
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Blogs Section */}
         <div className="relative z-10">
           {filteredAndSortedBlogs.length === 0 ? (

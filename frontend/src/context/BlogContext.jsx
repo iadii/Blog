@@ -83,6 +83,23 @@ export const BlogProvider = ({ children }) => {
     }
   }, []);
 
+  // Update blog
+  const updateBlog = useCallback(async (id, blogData) => {
+    setLoading(true);
+    try {
+      const response = await axios.put(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.UPDATE(id)), blogData);
+      setBlogs(prev => prev.map(blog => blog._id === id ? response.data : blog));
+      toast.success('Blog updated successfully!');
+      return response.data;
+    } catch (error) {
+      console.error('Error updating blog:', error);
+      toast.error('Failed to update blog');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   // Fetch blogs when user is authenticated
   useEffect(() => {
     if (isAuthenticated) {
@@ -100,9 +117,10 @@ export const BlogProvider = ({ children }) => {
     fetchBlogs,
     fetchBlog,
     createBlog,
+    updateBlog,
     deleteBlog,
     setCurrentBlog,
-  }), [blogs, currentBlog, loading, fetchBlogs, fetchBlog, createBlog, deleteBlog]);
+  }), [blogs, currentBlog, loading, fetchBlogs, fetchBlog, createBlog, updateBlog, deleteBlog]);
 
   return (
     <BlogContext.Provider value={value}>
