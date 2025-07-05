@@ -7,11 +7,10 @@ const passport = require('passport');
 
 dotenv.config();
 const app = express();
-
 // Passport config
 require('./config/passport')(passport);
 
-// CORS configuration with environment variables
+
 const allowedOrigins = [
   'https://blog-zeta-six-78.vercel.app',
   'https://blog-frontend-19zz.onrender.com',
@@ -20,7 +19,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc.)
+
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
@@ -42,21 +41,21 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'your-super-secret-session-key',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // Set to true in production with HTTPS
+    cookie: { secure: false } 
 }));
 
-// Passport middleware
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
+
 const authRoutes = require('./routes/authRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 
 app.use('/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
 
-// Test route
+
 app.get('/', (req, res) => {
     res.json({ 
         message: 'Server is running!',
