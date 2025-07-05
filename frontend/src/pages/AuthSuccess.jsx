@@ -3,6 +3,7 @@ import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { XCircle } from 'lucide-react';
+import axios from 'axios';
 
 const AuthSuccess = () => {
   const [searchParams] = useSearchParams();
@@ -25,6 +26,12 @@ const AuthSuccess = () => {
     if (!token) {
       navigate('/login', { replace: true });
       return;
+    }
+
+    // Save token to localStorage and axios headers immediately
+    if (token) {
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 
     // If already authenticated, redirect to dashboard
