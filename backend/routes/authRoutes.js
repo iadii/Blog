@@ -3,7 +3,11 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
-const FRONTEND_URL = 'http://localhost:5173'; // Centralized frontend URL
+
+// Determine frontend URL based on environment
+const FRONTEND_URL = process.env.NODE_ENV === 'production' 
+    ? 'https://blog-one-hazel-22.vercel.app'
+    : 'http://localhost:5173';
 
 // Google OAuth
 router.get('/google',
@@ -21,7 +25,7 @@ router.get('/google/callback',
         );
 
         // Redirect to frontend with token
-        res.redirect(`http://localhost:5173/auth/success?token=${token}`);
+        res.redirect(`${FRONTEND_URL}/auth/success?token=${token}`);
     }
 );
 
