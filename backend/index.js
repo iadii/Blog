@@ -14,8 +14,8 @@ require('./config/passport')(passport);
 // CORS configuration with environment variables
 const FR_URL = 'https://blog-zeta-six-78.vercel.app/' || "https://blog-frontend-19zz.onrender.com"
 const allowedOrigins = [
+  FR_URL,
   'http://localhost:5173',
-  FR_URL
 ];
 
 const corsOptions = {
