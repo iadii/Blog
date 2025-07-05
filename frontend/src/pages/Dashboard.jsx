@@ -121,7 +121,7 @@ const Dashboard = () => {
                 >
                   <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
                 </button>
-                <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Your Garden of Verses</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Your Writing Space</h1>
               </div>
               <p className="text-black-300 text-lg mb-8">Gaze upon your written flowers, each one a story blooming in the gentle light of your imagination.</p>
             </div>

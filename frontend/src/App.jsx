@@ -17,7 +17,7 @@ function App() {
   return (
     <AuthProvider>
       <BlogProvider>
-        <div className="min-h-screen bg-black-950">
+        <div className="min-h-screen">
           <Navbar />
           <main className="pt-16">
             <Routes>

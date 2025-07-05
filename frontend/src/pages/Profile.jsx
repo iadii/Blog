@@ -127,8 +127,8 @@ const Profile = () => {
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-white">Your Lyrical Portrait</h1>
-            <p className="text-black-300 text-lg">Trace your journey, count your verses, and bask in the gentle glow of your creative garden.</p>
+            <h1 className="text-3xl lg:text-4xl font-bold text-white">Your Profile</h1>
+            <p className="text-black-300 text-lg">Track your writing journey, see your progress, and manage your content.</p>
           </div>
         </div>
 
@@ -153,7 +153,7 @@ const Profile = () => {
               <p className="text-black-300 mb-2">{user?.email}</p>
               <div className="flex items-center gap-2 text-accent-400">
                 <Award className="w-4 h-4" />
-                <span className="text-sm font-medium">Serenade & Ink Dreamer</span>
+                <span className="text-sm font-medium">Writer</span>
               </div>
             </div>
 

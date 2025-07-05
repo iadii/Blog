@@ -7,17 +7,17 @@ const testimonials = [
   {
     name: 'Ava Carter',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-    quote: 'Serenade & Ink rekindled my muse—each word a dance, each page a gentle dawn. Here, my heart finds its melody.'
+    quote: 'Atelier helped me find my writing voice. The clean interface and smooth experience make writing enjoyable.'
   },
   {
     name: 'Liam Smith',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    quote: 'To write here is to paint with moonlight. The beauty of the ink and the ease of the flow—pure poetry in motion.'
+    quote: 'The platform is intuitive and beautiful. It makes sharing my thoughts and connecting with readers effortless.'
   },
   {
     name: 'Sophia Lee',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    quote: 'A haven for dreamers—Serenade & Ink is where my stories bloom on wings of wonder.'
+    quote: 'A great place for writers—Atelier provides the tools I need to create and share meaningful content.'
   }
 ];
 
@@ -85,17 +85,17 @@ const Home = () => {
           {/* Left: Text */}
           <div className="flex-1 flex flex-col items-start md:items-start text-left">
             <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
-              Serenade & Ink
+              Atelier
             </h1>
             <p className="text-lg md:text-2xl text-white/70 mb-12 max-w-xl font-normal">
-              Where every thought is a flower, and every story a song—compose your garden, let your words bloom and belong.
+              Where the labyrinthine corridors of imagination converge with the precision of craft, birthing narratives that transcend the boundaries of mere words.
             </p>
             {isAuthenticated ? (
               <Link
                 to="/dashboard"
                 className="px-8 py-4 rounded-lg bg-teal-500 text-white font-semibold text-lg shadow hover:bg-teal-400 transition"
               >
-                Enter Your Sanctuary
+                Go to Dashboard
               </Link>
             ) : (
               <Link
@@ -144,7 +144,7 @@ const Home = () => {
         {/* How it Works Section (overlapping cards) */}
         <section className="py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-white mb-10 text-center">Compose in Three Heartbeats</h2>
+            <h2 className="text-3xl font-bold text-white mb-10 text-center">Getting Started</h2>
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
               {steps.map((step, idx) => (
                 <div

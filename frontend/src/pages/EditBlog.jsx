@@ -104,7 +104,7 @@ const EditBlog = () => {
             <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6 mb-2">
               <label htmlFor="title" className="text-lg font-bold text-white flex items-center gap-2 mb-2">
                 <Type className="w-5 h-5 text-teal-400" />
-                Title of Your Song
+                Blog Title
               </label>
               <input
                 id="title"

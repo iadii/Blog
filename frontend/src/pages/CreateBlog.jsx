@@ -64,7 +64,7 @@ const CreateBlog = () => {
             <div className="w-12 h-12 bg-black-900 rounded-xl flex items-center justify-center shadow-md">
               <BookOpen className="w-6 h-6 text-teal-400 drop-shadow-glow" />
             </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Weave a New Verse</h1>
+            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Create New Post</h1>
           </div>
         </div>
         {/* Main Content: Two-column layout on desktop, stacked on mobile */}
@@ -75,7 +75,7 @@ const CreateBlog = () => {
             <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6 mb-2">
               <label htmlFor="title" className="text-lg font-bold text-white flex items-center gap-2 mb-2">
                 <Type className="w-5 h-5 text-teal-400" />
-                Title of Your Song
+                Blog Title
               </label>
               <input
                 id="title"

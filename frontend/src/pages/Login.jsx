@@ -56,16 +56,16 @@ const Login = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-accent-500 to-gold-500 rounded-xl flex items-center justify-center mr-4">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-4xl font-black gradient-text">Serenade & Ink</h1>
+              <h1 className="text-4xl font-black gradient-text">Atelier</h1>
             </div>
             
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
-              Step into Your Sanctuary<br />
-              <span className="gradient-text">Where Every Soul Sings</span>
+              Welcome Back<br />
+              <span className="gradient-text">Start Writing Today</span>
             </h2>
             
             <p className="text-xl text-black-300 mb-8 leading-relaxed">
-              Join a gathering of dreamers who trust Serenade & Ink to cradle their thoughts, let their stories bloom, and their ideas dance in a sanctuary woven from moonlight and ink.
+              Join writers who trust Atelier to share their thoughts, create meaningful content, and connect with others through their writing.
             </p>
 
             {/* Benefits */}
