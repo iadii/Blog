@@ -17,7 +17,8 @@ import {
   FileText,
   MoreVertical,
   Edit3,
-  ArrowLeft
+  ArrowLeft,
+  Share2
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -40,6 +41,31 @@ const Dashboard = () => {
       setDeleteConfirm(null);
       toast.success('Blog deleted successfully');
     }
+  };
+
+  const handleShare = async (blog) => {
+    const shareUrl = `${window.location.origin}/blog/${blog._id}`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: blog.title,
+          text: blog.content.substring(0, 100) + '...',
+          url: shareUrl,
+        });
+      } catch (error) {
+        // Fallback to clipboard
+        copyToClipboard(shareUrl);
+      }
+    } else {
+      copyToClipboard(shareUrl);
+    }
+  };
+
+  const copyToClipboard = (url) => {
+    navigator.clipboard.writeText(url)
+      .then(() => toast.success('Link copied to clipboard!'))
+      .catch(() => toast.error('Failed to copy link'));
   };
 
   const filteredAndSortedBlogs = blogs
@@ -202,271 +228,145 @@ const Dashboard = () => {
               )}
             </div>
           ) : (
-            <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
-              {filteredAndSortedBlogs.map((blog, index) => (
-                <div 
-                  key={blog._id} 
-                  className={`card group hover:scale-[1.02] transition-all duration-300 bg-black-800/30 backdrop-blur-xl border-black-700 hover:border-accent-500/30 ${
-                    viewMode === 'list' ? 'flex items-center gap-6' : ''
-                  }`}
-                  style={{animationDelay: `${index * 0.05}s`}}
-                >
-                  {viewMode === 'grid' ? (
-                    // Grid View
-                    <>
+            <>
+              {/* Search and Filter Controls */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search your blogs..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 bg-black-800/60 border border-white/10 rounded-xl text-white placeholder-black-400 focus:outline-none focus:ring-2 focus:ring-teal-400/50 focus:border-teal-400/50 transition-all duration-200"
+                  />
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black-400 w-4 h-4" />
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="pl-10 pr-8 py-3 bg-black-800/60 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-teal-400/50 focus:border-teal-400/50 transition-all duration-200 appearance-none"
+                    >
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                      <option value="title">Alphabetical</option>
+                    </select>
+                  </div>
+                  <button
+                    onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+                    className="p-3 bg-black-800/60 border border-white/10 rounded-xl text-white hover:bg-black-700/60 transition-all duration-200"
+                  >
+                    {viewMode === 'grid' ? (
+                      <div className="w-5 h-5 grid grid-cols-2 gap-0.5">
+                        <div className="w-full h-full bg-white rounded-sm"></div>
+                        <div className="w-full h-full bg-white rounded-sm"></div>
+                        <div className="w-full h-full bg-white rounded-sm"></div>
+                        <div className="w-full h-full bg-white rounded-sm"></div>
+                      </div>
+                    ) : (
+                      <div className="w-5 h-5 space-y-0.5">
+                        <div className="w-full h-1 bg-white rounded-sm"></div>
+                        <div className="w-full h-1 bg-white rounded-sm"></div>
+                        <div className="w-full h-1 bg-white rounded-sm"></div>
+                      </div>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Blog Grid/List */}
+              <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
+                {filteredAndSortedBlogs.map((blog) => (
+                  <div key={blog._id} className="group relative">
+                    <div className="card bg-black-800/30 border-black-700 hover:border-teal-400/30 transition-all duration-300 h-full">
+                      {/* Blog Header */}
                       <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-xl font-bold text-white group-hover:bg-gradient-to-r group-hover:from-accent-400 group-hover:to-gold-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 line-clamp-2 flex-1">
-                          {blog.title}
-                        </h3>
-                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-2">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
+                            {blog.title}
+                          </h3>
+                          <div className="flex items-center gap-3 text-sm text-black-300">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              <span>{formatDate(blog.createdAt)}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              <span>{getReadTime(blog.content)} min read</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Blog Content Preview */}
+                      <div className="mb-6">
+                        <p className="text-black-300 line-clamp-3 leading-relaxed">
+                          {truncateContent(blog.content)}
+                        </p>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex items-center justify-between pt-4 border-t border-black-700">
+                        <div className="flex items-center gap-2">
                           <Link
                             to={`/blog/${blog._id}`}
-                            className="p-2 text-gray-400 hover:text-accent-400 hover:bg-accent-500/10 rounded-lg transition-all duration-200"
-                            title="View blog"
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-teal-400 hover:text-teal-300 transition-colors duration-200"
                           >
                             <Eye className="w-4 h-4" />
+                            <span>View</span>
                           </Link>
+                          <button
+                            onClick={() => handleShare(blog)}
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                          >
+                            <Share2 className="w-4 h-4" />
+                            <span>Share</span>
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-2">
                           <Link
                             to={`/blog/${blog._id}/edit`}
-                            className="p-2 text-gray-400 hover:text-gold-400 hover:bg-gold-500/10 rounded-lg transition-all duration-200"
+                            className="p-2 text-black-400 hover:text-blue-400 transition-colors duration-200"
                             title="Edit blog"
                           >
                             <Edit3 className="w-4 h-4" />
                           </Link>
                           <button
                             onClick={() => setDeleteConfirm(blog._id)}
-                            className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                            className="p-2 text-black-400 hover:text-red-400 transition-colors duration-200"
                             title="Delete blog"
                           >
                             <Trash2 className="w-4 h-4" />
-                            <span className="sr-only">Release to the Night</span>
                           </button>
                         </div>
                       </div>
-                      
-                      <p className="text-black-300 mb-4 line-clamp-3 text-sm">
-                        {truncateContent(blog.content)}
-                      </p>
-                      
-                      <div className="flex items-center justify-between text-sm text-black-400">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatDate(blog.createdAt)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{getReadTime(blog.content)} min read</span>
-                          </div>
-                        </div>
-                        <Link
-                          to={`/blog/${blog._id}`}
-                          className="text-accent-400 hover:text-accent-300 transition-colors duration-200 font-medium"
-                        >
-                          Read more →
-                        </Link>
-                      </div>
-                    </>
-                  ) : (
-                    // List View
-                    <>
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="text-xl font-bold text-white group-hover:bg-gradient-to-r group-hover:from-accent-400 group-hover:to-gold-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                            {blog.title}
-                          </h3>
-                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <Link
-                              to={`/blog/${blog._id}`}
-                              className="p-2 text-gray-400 hover:text-accent-400 hover:bg-accent-500/10 rounded-lg transition-all duration-200"
-                              title="View blog"
-                            >
-                              <Eye className="w-4 h-4" />
-                            </Link>
-                            <Link
-                              to={`/blog/${blog._id}/edit`}
-                              className="p-2 text-gray-400 hover:text-gold-400 hover:bg-gold-500/10 rounded-lg transition-all duration-200"
-                              title="Edit blog"
-                            >
-                              <Edit3 className="w-4 h-4" />
-                            </Link>
-                            <button
-                              onClick={() => setDeleteConfirm(blog._id)}
-                              className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
-                              title="Delete blog"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                              <span className="sr-only">Release to the Night</span>
-                            </button>
-                          </div>
-                        </div>
-                        
-                        <p className="text-black-300 mb-3 line-clamp-2 text-sm">
-                          {truncateContent(blog.content, 200)}
-                        </p>
-                        
-                        <div className="flex items-center gap-4 text-sm text-black-400">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatDate(blog.createdAt)} at {formatTime(blog.createdAt)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{getReadTime(blog.content)} min read</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <FileText className="w-4 h-4" />
-                            <span>{getWordCount(blog.content)} words</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <Link
-                        to={`/blog/${blog._id}`}
-                        className="btn-secondary px-4 py-2 text-sm whitespace-nowrap"
-                      >
-                        View Blog
-                      </Link>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
 
       {/* Delete Confirmation Modal */}
       {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="card max-w-md w-full bg-black-800/90 backdrop-blur-xl border-black-700">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
-                <Trash2 className="w-6 h-6 text-red-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Delete Blog</h3>
-                <p className="text-black-300 text-sm">This action cannot be undone</p>
-              </div>
-            </div>
-            <p className="text-black-300 mb-6">
-              Are you sure you want to delete this blog? This action cannot be undone.
-            </p>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-black-800 border border-black-700 rounded-2xl p-8 max-w-md mx-4">
+            <h3 className="text-xl font-bold text-white mb-4">Delete Blog</h3>
+            <p className="text-black-300 mb-6">Are you sure you want to delete this blog? This action cannot be undone.</p>
             <div className="flex gap-4">
               <button
                 onClick={() => setDeleteConfirm(null)}
-                className="btn-secondary flex-1"
+                className="flex-1 px-4 py-2 text-black-300 border border-black-600 rounded-xl hover:bg-black-700 transition-colors duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirm)}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Dashboard;
-                            <Link
-                              to={`/blog/${blog._id}`}
-                              className="p-2 text-gray-400 hover:text-accent-400 hover:bg-accent-500/10 rounded-lg transition-all duration-200"
-                              title="View blog"
-                            >
-                              <Eye className="w-4 h-4" />
-                            </Link>
-                            <button
-                              onClick={() => handleShare(blog)}
-                              className="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-all duration-200"
-                              title="Share blog"
-                            >
-                              <Share2 className="w-4 h-4" />
-                            </button>
-                            <Link
-                              to={`/blog/${blog._id}/edit`}
-                              className="p-2 text-gray-400 hover:text-gold-400 hover:bg-gold-500/10 rounded-lg transition-all duration-200"
-                              title="Edit blog"
-                            >
-                              <Edit3 className="w-4 h-4" />
-                            </Link>
-                            <button
-                              onClick={() => setDeleteConfirm(blog._id)}
-                              className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
-                              title="Delete blog"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                              <span className="sr-only">Release to the Night</span>
-                            </button>
-                          </div>
-                        </div>
-                        
-                        <p className="text-black-300 mb-3 line-clamp-2 text-sm">
-                          {truncateContent(blog.content, 200)}
-                        </p>
-                        
-                        <div className="flex items-center gap-4 text-sm text-black-400">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            <span>{formatDate(blog.createdAt)} at {formatTime(blog.createdAt)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{getReadTime(blog.content)} min read</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <FileText className="w-4 h-4" />
-                            <span>{getWordCount(blog.content)} words</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <Link
-                        to={`/blog/${blog._id}`}
-                        className="btn-secondary px-4 py-2 text-sm whitespace-nowrap"
-                      >
-                        View Blog
-                      </Link>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Delete Confirmation Modal */}
-      {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="card max-w-md w-full bg-black-800/90 backdrop-blur-xl border-black-700">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
-                <Trash2 className="w-6 h-6 text-red-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Delete Blog</h3>
-                <p className="text-black-300 text-sm">This action cannot be undone</p>
-              </div>
-            </div>
-            <p className="text-black-300 mb-6">
-              Are you sure you want to delete this blog? This action cannot be undone.
-            </p>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setDeleteConfirm(null)}
-                className="btn-secondary flex-1"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => handleDelete(deleteConfirm)}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
+                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors duration-200"
               >
                 Delete
               </button>
