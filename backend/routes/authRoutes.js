@@ -5,6 +5,8 @@ const User = require('../models/User');
 const router = express.Router();
 
 // Determine frontend URL based on environment
+
+const FR_URL = 'https://blog-zeta-six-78.vercel.app/' || "https://blog-frontend-19zz.onrender.com"
 const FRONTEND_URL = process.env.NODE_ENV === 'production' 
     ? 'https://blog-zeta-six-78.vercel.app/'
     : 'http://localhost:5173';
