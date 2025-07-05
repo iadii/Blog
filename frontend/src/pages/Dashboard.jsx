@@ -374,3 +374,108 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+                            <Link
+                              to={`/blog/${blog._id}`}
+                              className="p-2 text-gray-400 hover:text-accent-400 hover:bg-accent-500/10 rounded-lg transition-all duration-200"
+                              title="View blog"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </Link>
+                            <button
+                              onClick={() => handleShare(blog)}
+                              className="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-all duration-200"
+                              title="Share blog"
+                            >
+                              <Share2 className="w-4 h-4" />
+                            </button>
+                            <Link
+                              to={`/blog/${blog._id}/edit`}
+                              className="p-2 text-gray-400 hover:text-gold-400 hover:bg-gold-500/10 rounded-lg transition-all duration-200"
+                              title="Edit blog"
+                            >
+                              <Edit3 className="w-4 h-4" />
+                            </Link>
+                            <button
+                              onClick={() => setDeleteConfirm(blog._id)}
+                              className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                              title="Delete blog"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                              <span className="sr-only">Release to the Night</span>
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <p className="text-black-300 mb-3 line-clamp-2 text-sm">
+                          {truncateContent(blog.content, 200)}
+                        </p>
+                        
+                        <div className="flex items-center gap-4 text-sm text-black-400">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <span>{formatDate(blog.createdAt)} at {formatTime(blog.createdAt)}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            <span>{getReadTime(blog.content)} min read</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <FileText className="w-4 h-4" />
+                            <span>{getWordCount(blog.content)} words</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <Link
+                        to={`/blog/${blog._id}`}
+                        className="btn-secondary px-4 py-2 text-sm whitespace-nowrap"
+                      >
+                        View Blog
+                      </Link>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="card max-w-md w-full bg-black-800/90 backdrop-blur-xl border-black-700">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                <Trash2 className="w-6 h-6 text-red-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Delete Blog</h3>
+                <p className="text-black-300 text-sm">This action cannot be undone</p>
+              </div>
+            </div>
+            <p className="text-black-300 mb-6">
+              Are you sure you want to delete this blog? This action cannot be undone.
+            </p>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="btn-secondary flex-1"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDelete(deleteConfirm)}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Dashboard;
