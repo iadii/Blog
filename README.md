@@ -1,4 +1,4 @@
-# Serenade & Ink
+# Atelier
 
 A modern, full-stack blog platform for those who write as if serenading the stars, with every line a song of devotion. Built with React (Vite, Tailwind), Node.js, Express, and MongoDB.
 
