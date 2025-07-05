@@ -3,10 +3,7 @@ const User = require('../models/User');
 
 module.exports = function(passport) {
     // Determine callback URL based on environment
-    const callbackURL = process.env.NODE_ENV === 'production' 
-        ? 'https://blog-backend-kmoo.onrender.com/auth/google/callback'
-        : 'http://localhost:3001/auth/google/callback';
-
+    const callbackURL =  'https://blog-backend-kmoo.onrender.com/auth/google/callback'
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
