@@ -23,7 +23,7 @@ export const getApiUrl = (endpoint) => {
 };
 
 // Export the base URL for direct use
-export const BACKEND_URL = API_CONFIG.BASE_URL;
+export const BACKEND_URL = 'https://blog-backend-kmoo.onrender.com';
 
 // Export the frontend URL for direct use
 const FR_URL = 'https://blog-zeta-six-78.vercel.app/' || "https://blog-frontend-19zz.onrender.com"
