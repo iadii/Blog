@@ -1,6 +1,6 @@
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001',
+  BASE_URL: 'https://blog-backend-kmoo.onrender.com',
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/auth/google',
@@ -30,7 +30,7 @@ export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || 'http://localho
 
 // Environment variables for debugging
 export const ENV_INFO = {
-  backendUrl: import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001',
+  backendUrl: 'https://blog-backend-kmoo.onrender.com',
   nodeEnv: import.meta.env.MODE || 'development',
   isDev: import.meta.env.DEV || false,
   isProd: import.meta.env.PROD || false
