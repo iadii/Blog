@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Determine frontend URL based on environment
 const FRONTEND_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://blog-one-hazel-22.vercel.app'
+    ? 'https://blog-zeta-six-78.vercel.app/'
     : 'http://localhost:5173';
 
 // Google OAuth
