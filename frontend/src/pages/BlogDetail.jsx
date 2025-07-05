@@ -19,30 +19,45 @@ const BlogDetail = () => {
   useEffect(() => {
     const loadBlog = async () => {
       setBlogLoading(true);
-      let blogData;
+      let blogData = null;
       
-      if (isAuthenticated) {
-        // Try to fetch as authenticated user first
-        blogData = await fetchBlog(id);
-        if (blogData && blogData.author === user?.name) {
-          setIsOwner(true);
+      try {
+        // If user is authenticated, try to fetch as authenticated user first
+        if (isAuthenticated) {
+          try {
+            blogData = await fetchBlog(id);
+            if (blogData && blogData.author === user?.name) {
+              setIsOwner(true);
+            }
+          } catch (error) {
+            console.log('Authenticated fetch failed, trying public access');
+          }
         }
+        
+        // If no blog data yet (not authenticated or authenticated fetch failed), try public access
+        if (!blogData) {
+          try {
+            blogData = await fetchPublicBlog(id);
+            setIsOwner(false);
+          } catch (error) {
+            console.error('Public fetch also failed:', error);
+            blogData = null;
+          }
+        }
+        
+        setBlog(blogData);
+      } catch (error) {
+        console.error('Error loading blog:', error);
+        setBlog(null);
+      } finally {
+        setBlogLoading(false);
       }
-      
-      // If not authenticated or not the owner, try public access
-      if (!blogData) {
-        blogData = await fetchPublicBlog(id);
-        setIsOwner(false);
-      }
-      
-      setBlog(blogData);
-      setBlogLoading(false);
     };
     
     if (id) {
       loadBlog();
     }
-  }, [id, isAuthenticated, user]);
+  }, [id, isAuthenticated, user, fetchBlog, fetchPublicBlog]);
 
   const handleDelete = async () => {
     if (!isOwner) return;
@@ -55,7 +70,7 @@ const BlogDetail = () => {
   };
 
   const handleShare = async () => {
-    const shareUrl = `${window.location.origin}/blog/public/${id}`;
+    const shareUrl = `${window.location.origin}/blog/${id}`;
     
     if (navigator.share) {
       try {
@@ -238,30 +253,20 @@ const BlogDetail = () => {
 
       {/* Delete Confirmation Modal */}
       {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="card max-w-md w-full bg-black-800/90 backdrop-blur-xl border-black-700">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
-                <Trash2 className="w-6 h-6 text-red-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Delete Blog</h3>
-                <p className="text-black-300 text-sm">This action cannot be undone</p>
-              </div>
-            </div>
-            <p className="text-black-300 mb-6">
-              Are you sure you want to delete <span className="text-accent-400 font-medium">"{blog.title}"</span>? This action cannot be undone.
-            </p>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-black-800 border border-black-700 rounded-2xl p-8 max-w-md mx-4">
+            <h3 className="text-xl font-bold text-white mb-4">Delete Blog</h3>
+            <p className="text-black-300 mb-6">Are you sure you want to delete this blog? This action cannot be undone.</p>
             <div className="flex gap-4">
               <button
                 onClick={() => setDeleteConfirm(false)}
-                className="btn-secondary flex-1"
+                className="flex-1 px-4 py-2 text-black-300 border border-black-600 rounded-xl hover:bg-black-700 transition-colors duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
+                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors duration-200"
               >
                 Delete
               </button>
