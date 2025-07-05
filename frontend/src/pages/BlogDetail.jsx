@@ -9,16 +9,32 @@ import toast from 'react-hot-toast';
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { fetchBlog, deleteBlog, currentBlog, loading } = useBlog();
+  const { user, isAuthenticated } = useAuth();
+  const { fetchBlog, fetchPublicBlog, deleteBlog, currentBlog, loading } = useBlog();
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [blog, setBlog] = useState(null);
   const [blogLoading, setBlogLoading] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     const loadBlog = async () => {
       setBlogLoading(true);
-      const blogData = await fetchBlog(id);
+      let blogData;
+      
+      if (isAuthenticated) {
+        // Try to fetch as authenticated user first
+        blogData = await fetchBlog(id);
+        if (blogData && blogData.author === user?.name) {
+          setIsOwner(true);
+        }
+      }
+      
+      // If not authenticated or not the owner, try public access
+      if (!blogData) {
+        blogData = await fetchPublicBlog(id);
+        setIsOwner(false);
+      }
+      
       setBlog(blogData);
       setBlogLoading(false);
     };
@@ -26,9 +42,11 @@ const BlogDetail = () => {
     if (id) {
       loadBlog();
     }
-  }, [id]);
+  }, [id, isAuthenticated, user]);
 
   const handleDelete = async () => {
+    if (!isOwner) return;
+    
     const success = await deleteBlog(id);
     if (success) {
       toast.success('Blog deleted successfully');
@@ -37,24 +55,26 @@ const BlogDetail = () => {
   };
 
   const handleShare = async () => {
+    const shareUrl = `${window.location.origin}/blog/public/${id}`;
+    
     if (navigator.share) {
       try {
         await navigator.share({
           title: blog.title,
           text: blog.content.substring(0, 100) + '...',
-          url: window.location.href,
+          url: shareUrl,
         });
       } catch (error) {
         // Fallback to clipboard
-        copyToClipboard();
+        copyToClipboard(shareUrl);
       }
     } else {
-      copyToClipboard();
+      copyToClipboard(shareUrl);
     }
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(window.location.href)
+  const copyToClipboard = (url) => {
+    navigator.clipboard.writeText(url)
       .then(() => toast.success('Link copied to clipboard!'))
       .catch(() => toast.error('Failed to copy link'));
   };
@@ -135,13 +155,26 @@ const BlogDetail = () => {
             >
               <Share2 className="w-5 h-5" />
             </button>
-            <button
-              onClick={() => setDeleteConfirm(true)}
-              className="p-3 text-red-400 rounded-xl transition-all duration-200 border border-black-700"
-              title="Delete blog"
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
+            
+            {/* Only show edit/delete buttons if user is the owner */}
+            {isOwner && (
+              <>
+                <Link
+                  to={`/blog/${id}/edit`}
+                  className="p-3 text-blue-400 rounded-xl transition-all duration-200 border border-black-700"
+                  title="Edit blog"
+                >
+                  <Edit className="w-5 h-5" />
+                </Link>
+                <button
+                  onClick={() => setDeleteConfirm(true)}
+                  className="p-3 text-red-400 rounded-xl transition-all duration-200 border border-black-700"
+                  title="Delete blog"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -157,7 +190,7 @@ const BlogDetail = () => {
             <div className="flex flex-wrap items-center gap-4 text-sm">
               <div className="flex items-center gap-2 px-3 py-2 bg-accent-500/10 rounded-xl">
                 <User className="w-4 h-4 text-accent-400" />
-                <span className="text-accent-300 font-medium">By {blog.author?.name || user?.name}</span>
+                <span className="text-accent-300 font-medium">By {blog.author}</span>
               </div>
               
               <div className="flex items-center gap-2 px-3 py-2 bg-gold-500/10 rounded-xl">
@@ -185,12 +218,12 @@ const BlogDetail = () => {
               <div className="flex items-center gap-4">
                 <img
                   src={blog.author?.picture || user?.picture || '/default-avatar.png'}
-                  alt={blog.author?.name || user?.name}
+                  alt={blog.author}
                   className="w-14 h-14 rounded-full border-2 border-accent-500 object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div>
-                  <p className="text-white font-bold text-lg">{blog.author?.name || user?.name}</p>
+                  <p className="text-white font-bold text-lg">{blog.author}</p>
                 </div>
               </div>
               
@@ -201,17 +234,6 @@ const BlogDetail = () => {
             </div>
           </footer>
         </article>
-
-        {/* Navigation */}
-        {/* <div className="mt-8 flex justify-center">
-          <Link
-            to="/"
-            className="btn-secondary flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
-          </Link>
-        </div> */}
       </div>
 
       {/* Delete Confirmation Modal */}
