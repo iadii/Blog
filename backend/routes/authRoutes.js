@@ -38,18 +38,26 @@ router.get('/me', async (req, res) => {
         const token = req.header('Authorization')?.replace('Bearer ', '');
         // Debug: Log the extracted token
         console.log('Extracted token:', token);
-        
+        // Debug: Log the JWT secret
+        console.log('JWT_SECRET:', process.env.JWT_SECRET);
         if (!token) {
             return res.status(401).json({ message: 'No token provided' });
         }
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        let decoded;
+        try {
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (err) {
+            console.log('JWT verification error:', err);
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+        // Debug: Log the decoded payload
+        console.log('Decoded:', decoded);
         const user = await User.findById(decoded.userId);
-        
+        // Debug: Log the user lookup result
+        console.log('User:', user);
         if (!user) {
             return res.status(401).json({ message: 'User not found' });
         }
-
         res.json(user);
     } catch (error) {
         res.status(401).json({ message: 'Invalid token' });
