@@ -26,7 +26,8 @@ export const getApiUrl = (endpoint) => {
 export const BACKEND_URL = API_CONFIG.BASE_URL;
 
 // Export the frontend URL for direct use
-export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173';
+const FR_URL = 'https://blog-zeta-six-78.vercel.app/' || "https://blog-frontend-19zz.onrender.com"
+export const FRONTEND_URL = import.meta.env.VITE_FRONTEND_URL || FR_URL;
 
 // Environment variables for debugging
 export const ENV_INFO = {
