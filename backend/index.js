@@ -12,9 +12,9 @@ const app = express();
 require('./config/passport')(passport);
 
 // CORS configuration with environment variables
-const FR_URL = 'https://blog-zeta-six-78.vercel.app/' || "https://blog-frontend-19zz.onrender.com"
 const allowedOrigins = [
-  FR_URL,
+  'https://blog-zeta-six-78.vercel.app',
+  'https://blog-frontend-19zz.onrender.com',
   'http://localhost:5173',
 ];
 
@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
     res.json({ 
         message: 'Server is running!',
         backendUrl: process.env.BACKEND_URL || 'http://localhost:3001',
-        frontendUrl: process.env.FRONTEND_URL || FR_URL
+        frontendUrl: process.env.FRONTEND_URL || 'https://blog-zeta-six-78.vercel.app'
     });
 });
 
@@ -73,7 +73,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/blogsphere'
     const backendUrl = process.env.BACKEND_URL || `http://localhost:${port}`;
     app.listen(port, () => {
         console.log(`✅ Server running on ${backendUrl}`);
-        console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL || FR_URL}`);
+        console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL || 'https://blog-zeta-six-78.vercel.app'}`);
     });
 }).catch(err => {
     console.error('❌ MongoDB connection failed:', err);
