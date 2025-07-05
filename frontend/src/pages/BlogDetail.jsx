@@ -203,7 +203,7 @@ const BlogDetail = () => {
         </article>
 
         {/* Navigation */}
-        <div className="mt-8 flex justify-center">
+        {/* <div className="mt-8 flex justify-center">
           <Link
             to="/"
             className="btn-secondary flex items-center gap-2"
@@ -211,7 +211,7 @@ const BlogDetail = () => {
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       {/* Delete Confirmation Modal */}
