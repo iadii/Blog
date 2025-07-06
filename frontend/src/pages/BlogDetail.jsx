@@ -102,15 +102,29 @@ const BlogDetail = () => {
     }
   };
 
-  const handleToggleShare = async () => {
+  const handleShare = async () => {
     if (!isOwner) return;
     
-    const newSharedStatus = !isShared;
-    const success = await toggleBlogSharing(id, newSharedStatus);
+    const success = await toggleBlogSharing(id, true);
     
     if (success) {
-      setIsShared(newSharedStatus);
-      toast.success(newSharedStatus ? 'Blog shared successfully!' : 'Blog unshared successfully!');
+      setIsShared(true);
+      toast.success('Blog shared successfully!');
+    } else {
+      toast.error('Failed to share blog');
+    }
+  };
+
+  const handleUnshare = async () => {
+    if (!isOwner) return;
+    
+    const success = await toggleBlogSharing(id, false);
+    
+    if (success) {
+      setIsShared(false);
+      toast.success('Blog unshared successfully!');
+    } else {
+      toast.error('Failed to unshare blog');
     }
   };
 
@@ -215,44 +229,66 @@ const BlogDetail = () => {
           </button>
           
           <div className="flex items-center gap-2">
-            {/* Share button with dropdown for owners */}
+            {/* Share/Unshare buttons for owners */}
             {isOwner && (
-              <div className="relative share-menu-container">
-                <button
-                  onClick={handleToggleShare}
-                  onMouseEnter={() => isShared && setShowShareMenu(true)}
-                  className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
-                    isShared 
-                      ? 'text-green-400 bg-green-500/10' 
-                      : 'text-black-400'
-                  }`}
-                  title={isShared ? 'Blog is shared - click to unshare' : 'Share blog'}
-                >
-                  <Share2 className="w-5 h-5" />
-                </button>
-                
-                {/* Share dropdown menu */}
-                {isShared && showShareMenu && (
-                  <div 
-                    className="absolute right-0 top-full mt-2 w-48 bg-black-800 border border-black-700 rounded-xl shadow-lg z-50"
-                    onMouseLeave={() => setShowShareMenu(false)}
+              <div className="flex items-center gap-2">
+                {/* Share button */}
+                {!isShared && (
+                  <button
+                    onClick={handleShare}
+                    className="p-3 text-green-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
+                    title="Share blog"
                   >
-                    <div className="p-2">
-                      <button
-                        onClick={handleCopyLink}
-                        className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
+                    <Share2 className="w-5 h-5" />
+                  </button>
+                )}
+                
+                {/* Unshare button */}
+                {isShared && (
+                  <button
+                    onClick={handleUnshare}
+                    className="p-3 text-red-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
+                    title="Unshare blog"
+                  >
+                    <Share2 className="w-5 h-5" />
+                  </button>
+                )}
+                
+                {/* Share dropdown menu for shared blogs */}
+                {isShared && (
+                  <div className="relative share-menu-container">
+                    <button
+                      onMouseEnter={() => setShowShareMenu(true)}
+                      className="p-3 text-blue-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
+                      title="Share options"
+                    >
+                      <LinkIcon className="w-5 h-5" />
+                    </button>
+                    
+                    {/* Share dropdown menu */}
+                    {showShareMenu && (
+                      <div 
+                        className="absolute right-0 top-full mt-2 w-48 bg-black-800 border border-black-700 rounded-xl shadow-lg z-50"
+                        onMouseLeave={() => setShowShareMenu(false)}
                       >
-                        <Copy className="w-4 h-4" />
-                        <span>Copy Link</span>
-                      </button>
-                      <button
-                        onClick={handleNativeShare}
-                        className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
-                      >
-                        <Globe className="w-4 h-4" />
-                        <span>Share</span>
-                      </button>
-                    </div>
+                        <div className="p-2">
+                          <button
+                            onClick={handleCopyLink}
+                            className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
+                          >
+                            <Copy className="w-4 h-4" />
+                            <span>Copy Link</span>
+                          </button>
+                          <button
+                            onClick={handleNativeShare}
+                            className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
+                          >
+                            <Globe className="w-4 h-4" />
+                            <span>Share</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

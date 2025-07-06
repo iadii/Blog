@@ -124,14 +124,11 @@ export const BlogProvider = ({ children }) => {
   // Toggle blog sharing
   const toggleBlogSharing = useCallback(async (id, shared) => {
     try {
-      console.log('Toggling blog sharing for ID:', id, 'shared:', shared);
       const response = await axios.put(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.UPDATE(id)), { shared });
-      console.log('Toggle sharing response:', response.data);
       setBlogs(prev => prev.map(blog => blog._id === id ? response.data : blog));
       if (currentBlog && currentBlog._id === id) {
         setCurrentBlog(response.data);
       }
-      toast.success(shared ? 'Blog shared successfully!' : 'Blog unshared successfully!');
       return response.data;
     } catch (error) {
       console.error('Error toggling blog sharing:', error);
@@ -139,7 +136,6 @@ export const BlogProvider = ({ children }) => {
         console.error('Response status:', error.response.status);
         console.error('Response data:', error.response.data);
       }
-      toast.error('Failed to update blog sharing');
       return null;
     }
   }, [currentBlog]);
