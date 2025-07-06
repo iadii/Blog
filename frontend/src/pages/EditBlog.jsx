@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Save, ArrowLeft, FileText, Type, BookOpen } from 'lucide-react';
+import { Save, ArrowLeft, FileText, Type, BookOpen, Share2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const EditBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [shared, setShared] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { updateBlog, fetchBlog } = useBlog();
@@ -21,6 +22,7 @@ const EditBlog = () => {
       if (blog) {
         setTitle(blog.title);
         setContent(blog.content);
+        setShared(blog.shared || false);
       } else {
         toast.error('Blog not found');
         navigate('/dashboard');
@@ -43,6 +45,7 @@ const EditBlog = () => {
     const blog = await updateBlog(id, {
       title: title.trim(),
       content: content.trim(),
+      shared,
     });
     if (blog) {
       toast.success('Blog updated successfully!');
@@ -143,6 +146,28 @@ const EditBlog = () => {
                 rows={6}
               />
             </div>
+            {/* Sharing Toggle */}
+            <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Share2 className="w-5 h-5 text-teal-400" />
+                  <div>
+                    <label className="text-lg font-bold text-white">Share this blog</label>
+                    <p className="text-sm text-white/60">Make this blog publicly accessible via link</p>
+                  </div>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={shared}
+                    onChange={(e) => setShared(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-black-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-teal-500"></div>
+                </label>
+              </div>
+            </div>
+
             {/* Update Button OUTSIDE the card, aligned right */}
             <div className="w-full flex justify-end mt-4">
               <button

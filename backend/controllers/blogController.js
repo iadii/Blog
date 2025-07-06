@@ -1,9 +1,24 @@
 const Blog = require('../models/blog');
 
+// Get shared blog by ID (public access)
+exports.getSharedBlog = async (req, res) => {
+    try {
+        const blog = await Blog.findOne({ 
+            _id: req.params.id, 
+            shared: true 
+        });
+        
+        if (!blog) return res.status(404).json({ message: "Shared blog not found" });
+        res.json(blog);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // Create a new blog (user-specific)
 exports.createBlog = async (req, res) => {
     try {
-        const { title, content } = req.body;
+        const { title, content, shared = false } = req.body;
         
         if (!title || !content) {
             return res.status(400).json({ message: 'Title and content are required' });
@@ -12,7 +27,8 @@ exports.createBlog = async (req, res) => {
         const newBlog = new Blog({ 
             title, 
             content, 
-            author: req.user.name 
+            author: req.user.name,
+            shared
         });
         
         await newBlog.save();
@@ -52,7 +68,7 @@ exports.getBlogById = async (req, res) => {
 // Update a blog (user's blog only)
 exports.updateBlog = async (req, res) => {
     try {
-        const { title, content } = req.body;
+        const { title, content, shared } = req.body;
         
         if (!title || !content) {
             return res.status(400).json({ message: 'Title and content are required' });
@@ -65,7 +81,8 @@ exports.updateBlog = async (req, res) => {
             },
             { 
                 title, 
-                content 
+                content,
+                shared: shared !== undefined ? shared : false
             },
             { new: true }
         );

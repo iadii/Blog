@@ -36,7 +36,7 @@ export const BlogProvider = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  // Fetch single blog
+  // Fetch single blog (authenticated)
   const fetchBlog = useCallback(async (id) => {
     setLoading(true);
     try {
@@ -46,6 +46,21 @@ export const BlogProvider = ({ children }) => {
     } catch (error) {
       console.error('Error fetching blog:', error);
       toast.error('Failed to fetch blog');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Fetch shared blog (public access)
+  const fetchPublicBlog = useCallback(async (id) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(getApiUrl(`/api/blogs/shared/${id}`));
+      setCurrentBlog(response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching shared blog:', error);
       return null;
     } finally {
       setLoading(false);
@@ -100,6 +115,23 @@ export const BlogProvider = ({ children }) => {
     }
   }, []);
 
+  // Toggle blog sharing
+  const toggleBlogSharing = useCallback(async (id, shared) => {
+    try {
+      const response = await axios.put(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.UPDATE(id)), { shared });
+      setBlogs(prev => prev.map(blog => blog._id === id ? response.data : blog));
+      if (currentBlog && currentBlog._id === id) {
+        setCurrentBlog(response.data);
+      }
+      toast.success(shared ? 'Blog shared successfully!' : 'Blog unshared successfully!');
+      return response.data;
+    } catch (error) {
+      console.error('Error toggling blog sharing:', error);
+      toast.error('Failed to update blog sharing');
+      return null;
+    }
+  }, [currentBlog]);
+
   // Fetch blogs when user is authenticated
   useEffect(() => {
     if (isAuthenticated) {
@@ -116,11 +148,13 @@ export const BlogProvider = ({ children }) => {
     loading,
     fetchBlogs,
     fetchBlog,
+    fetchPublicBlog,
     createBlog,
     updateBlog,
     deleteBlog,
+    toggleBlogSharing,
     setCurrentBlog,
-  }), [blogs, currentBlog, loading, fetchBlogs, fetchBlog, createBlog, updateBlog, deleteBlog]);
+  }), [blogs, currentBlog, loading, fetchBlogs, fetchBlog, fetchPublicBlog, createBlog, updateBlog, deleteBlog, toggleBlogSharing]);
 
   return (
     <BlogContext.Provider value={value}>

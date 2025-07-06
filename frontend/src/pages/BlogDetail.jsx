@@ -3,18 +3,19 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { useAuth } from '../context/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, BookOpen } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, BookOpen, Link as LinkIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
-  const { fetchBlog, fetchPublicBlog, deleteBlog, currentBlog, loading } = useBlog();
+  const { fetchBlog, fetchPublicBlog, deleteBlog, toggleBlogSharing, currentBlog, loading } = useBlog();
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [blog, setBlog] = useState(null);
   const [blogLoading, setBlogLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
+  const [isShared, setIsShared] = useState(false);
 
   useEffect(() => {
     const loadBlog = async () => {
@@ -49,6 +50,8 @@ const BlogDetail = () => {
           setIsOwner(false);
         }
         
+        // Set sharing status
+        setIsShared(blogData?.shared || false);
         setBlog(blogData);
       } catch (error) {
         console.error('Error loading blog:', error);
@@ -74,6 +77,17 @@ const BlogDetail = () => {
   };
 
   const handleShare = async () => {
+    if (!isOwner) return;
+    
+    const newSharedStatus = !isShared;
+    const success = await toggleBlogSharing(id, newSharedStatus);
+    
+    if (success) {
+      setIsShared(newSharedStatus);
+    }
+  };
+
+  const handleCopyLink = async () => {
     const shareUrl = `${window.location.origin}/blog/${id}`;
     
     if (navigator.share) {
@@ -167,13 +181,31 @@ const BlogDetail = () => {
           </button>
           
           <div className="flex items-center gap-2">
-            <button
-              onClick={handleShare}
-              className="p-3 text-black-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
-              title="Share blog"
-            >
-              <Share2 className="w-5 h-5" />
-            </button>
+            {/* Show share status and toggle button for owners */}
+            {isOwner && (
+              <button
+                onClick={handleShare}
+                className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
+                  isShared 
+                    ? 'text-green-400 bg-green-500/10' 
+                    : 'text-black-400'
+                }`}
+                title={isShared ? 'Blog is shared - click to unshare' : 'Share blog'}
+              >
+                <Share2 className="w-5 h-5" />
+              </button>
+            )}
+            
+            {/* Show copy link button for shared blogs */}
+            {isShared && (
+              <button
+                onClick={handleCopyLink}
+                className="p-3 text-blue-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
+                title="Copy share link"
+              >
+                <LinkIcon className="w-5 h-5" />
+              </button>
+            )}
             
             {/* Only show edit/delete buttons if user is the owner */}
             {isOwner && (
