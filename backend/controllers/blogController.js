@@ -78,8 +78,20 @@ exports.updateBlog = async (req, res) => {
     try {
         const { title, content, shared } = req.body;
         
-        if (!title || !content) {
-            return res.status(400).json({ message: 'Title and content are required' });
+        // Build update object with only provided fields
+        const updateData = {};
+        if (title !== undefined) updateData.title = title;
+        if (content !== undefined) updateData.content = content;
+        if (shared !== undefined) updateData.shared = shared;
+        
+        // If no fields to update, return error
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).json({ message: 'No fields to update' });
+        }
+        
+        // If updating title or content, both are required
+        if ((title !== undefined || content !== undefined) && (!title || !content)) {
+            return res.status(400).json({ message: 'Title and content are required when updating either' });
         }
         
         const updatedBlog = await Blog.findOneAndUpdate(
@@ -87,11 +99,7 @@ exports.updateBlog = async (req, res) => {
                 _id: req.params.id, 
                 author: req.user.name 
             },
-            { 
-                title, 
-                content,
-                shared: shared !== undefined ? shared : false
-            },
+            updateData,
             { new: true }
         );
         
