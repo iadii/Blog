@@ -232,29 +232,20 @@ const BlogDetail = () => {
             {/* Share/Unshare buttons for owners */}
             {isOwner && (
               <div className="flex items-center gap-2">
-                {/* Share button */}
-                {!isShared && (
-                  <button
-                    onClick={handleShare}
-                    className="p-3 text-green-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
-                    title="Share blog"
-                  >
-                    <Share2 className="w-5 h-5" />
-                  </button>
-                )}
+                {/* Share/Unshare button */}
+                <button
+                  onClick={isShared ? handleUnshare : handleShare}
+                  className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
+                    isShared 
+                      ? 'text-red-400' 
+                      : 'text-green-400'
+                  }`}
+                  title={isShared ? 'Unshare blog' : 'Share blog'}
+                >
+                  <Share2 className="w-5 h-5" />
+                </button>
                 
-                {/* Unshare button */}
-                {isShared && (
-                  <button
-                    onClick={handleUnshare}
-                    className="p-3 text-red-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
-                    title="Unshare blog"
-                  >
-                    <Share2 className="w-5 h-5" />
-                  </button>
-                )}
-                
-                {/* Share dropdown menu for shared blogs */}
+                {/* Share options dropdown for shared blogs */}
                 {isShared && (
                   <div className="relative share-menu-container">
                     <button
