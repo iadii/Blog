@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { useAuth } from '../context/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, BookOpen, Link as LinkIcon } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, BookOpen, Link as LinkIcon, Copy, Globe } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BlogDetail = () => {
@@ -16,6 +16,19 @@ const BlogDetail = () => {
   const [blogLoading, setBlogLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [isShared, setIsShared] = useState(false);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+
+  // Close share menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showShareMenu && !event.target.closest('.share-menu-container')) {
+        setShowShareMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showShareMenu]);
 
   useEffect(() => {
     const loadBlog = async () => {
@@ -89,7 +102,7 @@ const BlogDetail = () => {
     }
   };
 
-  const handleShare = async () => {
+  const handleToggleShare = async () => {
     if (!isOwner) return;
     
     const newSharedStatus = !isShared;
@@ -97,10 +110,17 @@ const BlogDetail = () => {
     
     if (success) {
       setIsShared(newSharedStatus);
+      toast.success(newSharedStatus ? 'Blog shared successfully!' : 'Blog unshared successfully!');
     }
   };
 
   const handleCopyLink = async () => {
+    const shareUrl = `${window.location.origin}/blog/${id}`;
+    copyToClipboard(shareUrl);
+    setShowShareMenu(false);
+  };
+
+  const handleNativeShare = async () => {
     const shareUrl = `${window.location.origin}/blog/${id}`;
     
     if (navigator.share) {
@@ -117,6 +137,7 @@ const BlogDetail = () => {
     } else {
       copyToClipboard(shareUrl);
     }
+    setShowShareMenu(false);
   };
 
   const copyToClipboard = (url) => {
@@ -194,23 +215,51 @@ const BlogDetail = () => {
           </button>
           
           <div className="flex items-center gap-2">
-            {/* Show share status and toggle button for owners */}
+            {/* Share button with dropdown for owners */}
             {isOwner && (
-              <button
-                onClick={handleShare}
-                className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
-                  isShared 
-                    ? 'text-green-400 bg-green-500/10' 
-                    : 'text-black-400'
-                }`}
-                title={isShared ? 'Blog is shared - click to unshare' : 'Share blog'}
-              >
-                <Share2 className="w-5 h-5" />
-              </button>
+              <div className="relative share-menu-container">
+                <button
+                  onClick={handleToggleShare}
+                  onMouseEnter={() => isShared && setShowShareMenu(true)}
+                  className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
+                    isShared 
+                      ? 'text-green-400 bg-green-500/10' 
+                      : 'text-black-400'
+                  }`}
+                  title={isShared ? 'Blog is shared - click to unshare' : 'Share blog'}
+                >
+                  <Share2 className="w-5 h-5" />
+                </button>
+                
+                {/* Share dropdown menu */}
+                {isShared && showShareMenu && (
+                  <div 
+                    className="absolute right-0 top-full mt-2 w-48 bg-black-800 border border-black-700 rounded-xl shadow-lg z-50"
+                    onMouseLeave={() => setShowShareMenu(false)}
+                  >
+                    <div className="p-2">
+                      <button
+                        onClick={handleCopyLink}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
+                      >
+                        <Copy className="w-4 h-4" />
+                        <span>Copy Link</span>
+                      </button>
+                      <button
+                        onClick={handleNativeShare}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-white hover:bg-black-700 rounded-lg transition-colors duration-200"
+                      >
+                        <Globe className="w-4 h-4" />
+                        <span>Share</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
             
-            {/* Show copy link button for shared blogs */}
-            {isShared && (
+            {/* Show copy link button for non-owners viewing shared blogs */}
+            {!isOwner && isShared && (
               <button
                 onClick={handleCopyLink}
                 className="p-3 text-blue-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
