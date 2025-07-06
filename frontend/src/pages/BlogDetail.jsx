@@ -102,29 +102,17 @@ const BlogDetail = () => {
     }
   };
 
-  const handleShare = async () => {
+  const handleToggleShare = async () => {
     if (!isOwner) return;
     
-    const success = await toggleBlogSharing(id, true);
+    const newSharedStatus = !isShared;
+    const success = await toggleBlogSharing(id, newSharedStatus);
     
     if (success) {
-      setIsShared(true);
-      toast.success('Blog shared successfully!');
+      setIsShared(newSharedStatus);
+      toast.success(newSharedStatus ? 'Blog shared successfully!' : 'Blog unshared successfully!');
     } else {
-      toast.error('Failed to share blog');
-    }
-  };
-
-  const handleUnshare = async () => {
-    if (!isOwner) return;
-    
-    const success = await toggleBlogSharing(id, false);
-    
-    if (success) {
-      setIsShared(false);
-      toast.success('Blog unshared successfully!');
-    } else {
-      toast.error('Failed to unshare blog');
+      toast.error(newSharedStatus ? 'Failed to share blog' : 'Failed to unshare blog');
     }
   };
 
@@ -232,9 +220,9 @@ const BlogDetail = () => {
             {/* Share/Unshare buttons for owners */}
             {isOwner && (
               <div className="flex items-center gap-2">
-                {/* Share/Unshare button */}
+                {/* Share/Unshare toggle button */}
                 <button
-                  onClick={isShared ? handleUnshare : handleShare}
+                  onClick={handleToggleShare}
                   className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
                     isShared 
                       ? 'text-red-400' 
