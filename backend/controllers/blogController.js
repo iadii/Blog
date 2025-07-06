@@ -3,13 +3,13 @@ const Blog = require('../models/blog');
 // Get shared blog by ID (public access)
 exports.getSharedBlog = async (req, res) => {
     try {
-        // For testing: allow access to any blog, not just shared ones
         const blog = await Blog.findOne({ 
-            _id: req.params.id
+            _id: req.params.id,
+            shared: true
         });
         
         if (!blog) {
-            return res.status(404).json({ message: "Blog not found" });
+            return res.status(404).json({ message: "Shared blog not found" });
         }
         
         res.json(blog);
