@@ -111,6 +111,12 @@ const BlogDetail = () => {
     if (success) {
       setIsShared(newSharedStatus);
       toast.success(newSharedStatus ? 'Blog shared successfully!' : 'Blog unshared successfully!');
+      
+      // If sharing, also copy the link to clipboard
+      if (newSharedStatus) {
+        const shareUrl = `${window.location.origin}/blog/${id}`;
+        copyToClipboard(shareUrl);
+      }
     } else {
       toast.error(newSharedStatus ? 'Failed to share blog' : 'Failed to unshare blog');
     }
