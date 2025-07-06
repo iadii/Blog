@@ -4,6 +4,7 @@ const blogController = require('../controllers/blogController');
 const auth = require('../middleware/auth');
 
 // Public route for shared blogs (no authentication required)
+// This must come BEFORE the generic :id route to avoid conflicts
 router.get('/shared/:id', blogController.getSharedBlog);
 
 // All other blog routes require authentication

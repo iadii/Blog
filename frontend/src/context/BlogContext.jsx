@@ -56,11 +56,17 @@ export const BlogProvider = ({ children }) => {
   const fetchPublicBlog = useCallback(async (id) => {
     setLoading(true);
     try {
-      const response = await axios.get(getApiUrl(`/api/blogs/shared/${id}`));
+      console.log('Attempting to fetch shared blog with ID:', id);
+      const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.BLOGS.SHARED(id)));
+      console.log('Shared blog response:', response.data);
       setCurrentBlog(response.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching shared blog:', error);
+      if (error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      }
       return null;
     } finally {
       setLoading(false);

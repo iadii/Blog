@@ -10,6 +10,7 @@ export const API_CONFIG = {
     BLOGS: {
       ALL: '/api/blogs',
       SINGLE: (id) => `/api/blogs/${id}`,
+      SHARED: (id) => `/api/blogs/shared/${id}`,
       CREATE: '/api/blogs',
       UPDATE: (id) => `/api/blogs/${id}`,
       DELETE: (id) => `/api/blogs/${id}`

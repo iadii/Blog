@@ -22,9 +22,14 @@ const BlogDetail = () => {
       setBlogLoading(true);
       let blogData = null;
       
+      console.log('Loading blog with ID:', id);
+      console.log('User authenticated:', isAuthenticated);
+      console.log('User name:', user?.name);
+      
       try {
-        // ALWAYS try public access first - this ensures the blog is shown to anyone
+        // First try to fetch as a shared blog (public access)
         try {
+          console.log('Attempting public fetch...');
           blogData = await fetchPublicBlog(id);
           console.log('Public blog loaded:', blogData);
         } catch (error) {
@@ -32,15 +37,23 @@ const BlogDetail = () => {
           blogData = null;
         }
         
-        // If public access failed, try authenticated access as fallback
+        // If public access failed and user is authenticated, try authenticated access
         if (!blogData && isAuthenticated) {
           try {
+            console.log('Attempting authenticated fetch...');
             blogData = await fetchBlog(id);
             console.log('Authenticated blog loaded:', blogData);
           } catch (error) {
             console.error('Authenticated fetch also failed:', error);
             blogData = null;
           }
+        }
+        
+        // If still no blog found, show error
+        if (!blogData) {
+          console.error('No blog found with ID:', id);
+          setBlog(null);
+          return;
         }
         
         // Set ownership based on whether user is authenticated and is the author
