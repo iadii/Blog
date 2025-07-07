@@ -191,23 +191,23 @@ const Dashboard = () => {
               >
                 <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
               </button>
-              <input
-                type="text"
+                  <input
+                    type="text"
                 placeholder="Search blogs..."
-                value={searchTerm}
+                    value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 className="w-full md:w-72 bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
-              />
-              <select
-                value={sortBy}
+                  />
+                    <select
+                      value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
                 className="bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
-              >
+                    >
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
                 <option value="title">Title</option>
-              </select>
-            </div>
+                    </select>
+                  </div>
             <Link
               to="/create"
               className="px-8 py-3 rounded-xl bg-teal-500 text-white font-semibold text-lg hover:bg-teal-400 transition flex items-center gap-2"
@@ -215,71 +215,71 @@ const Dashboard = () => {
               <Plus className="w-5 h-5" />
               <span>New Blog</span>
             </Link>
-          </div>
+                      </div>
           {/* Blog Cards */}
-          <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
-            {filteredAndSortedBlogs.map((blog) => (
-              <div key={blog._id} className="group relative">
-                <div className="rounded-2xl bg-black-800/60 border border-white/10 p-6 h-full flex flex-col">
-                  {/* Blog Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
-                        {blog.title}
-                      </h3>
-                      <div className="flex items-center gap-3 text-sm text-black-300">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          <span>{formatDate(blog.createdAt)}</span>
+              <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
+                {filteredAndSortedBlogs.map((blog) => (
+                  <div key={blog._id} className="group relative">
+                    <div className="rounded-2xl border border-white/10 p-6 h-full flex flex-col shadow-xl transition-transform duration-300 bg-[#0A0A0A] hover:scale-[1.025] hover:border-teal-400/40">
+                      {/* Blog Header */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
+                            {blog.title}
+                          </h3>
+                          <div className="flex items-center gap-3 text-sm text-gray-400">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              <span>{formatDate(blog.createdAt)}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              <span>{getReadTime(blog.content)} min read</span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{getReadTime(blog.content)} min read</span>
-                        </div>
+                      </div>
+                      {/* Blog Content Preview */}
+                      <div className="mb-6">
+                        <p className="text-gray-300 line-clamp-3 leading-relaxed">
+                          {truncateContent(blog.content)}
+                        </p>
+                      </div>
+                      {/* Action Buttons */}
+                      <div className="flex items-center gap-3 mt-auto">
+                        <Link
+                          to={`/blog/${blog._id}`}
+                          className="px-4 py-2 rounded-lg bg-teal-500 text-white font-semibold text-sm hover:bg-teal-400 transition flex items-center gap-1"
+                        >
+                          <Eye className="w-4 h-4" /> View
+                        </Link>
+                        <Link
+                          to={`/edit/${blog._id}`}
+                          className="px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-400 transition flex items-center gap-1"
+                        >
+                          <Edit3 className="w-4 h-4" /> Edit
+                        </Link>
+                        <button
+                          onClick={() => setDeleteConfirm(blog._id)}
+                          className="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold text-sm hover:bg-red-400 transition flex items-center gap-1"
+                        >
+                          <Trash2 className="w-4 h-4" /> Delete
+                        </button>
+                        <button
+                          onClick={() => handleShare(blog)}
+                          className="px-4 py-2 rounded-lg bg-gray-700 text-white font-semibold text-sm hover:bg-gray-600 transition flex items-center gap-1"
+                        >
+                          <Share2 className="w-4 h-4" /> Share
+                        </button>
                       </div>
                     </div>
                   </div>
-                  {/* Blog Content Preview */}
-                  <div className="mb-6">
-                    <p className="text-black-300 line-clamp-3 leading-relaxed">
-                      {truncateContent(blog.content)}
-                    </p>
-                  </div>
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-3 mt-auto">
-                    <Link
-                      to={`/blog/${blog._id}`}
-                      className="px-4 py-2 rounded-lg bg-teal-500 text-white font-semibold text-sm hover:bg-teal-400 transition"
-                    >
-                      <Eye className="w-4 h-4 mr-1 inline" /> View
-                    </Link>
-                    <Link
-                      to={`/edit/${blog._id}`}
-                      className="px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-400 transition"
-                    >
-                      <Edit3 className="w-4 h-4 mr-1 inline" /> Edit
-                    </Link>
-                    <button
-                      onClick={() => setDeleteConfirm(blog._id)}
-                      className="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold text-sm hover:bg-red-400 transition"
-                    >
-                      <Trash2 className="w-4 h-4 mr-1 inline" /> Delete
-                    </button>
-                    <button
-                      onClick={() => handleShare(blog)}
-                      className="px-4 py-2 rounded-lg bg-gray-700 text-white font-semibold text-sm hover:bg-gray-600 transition"
-                    >
-                      <Share2 className="w-4 h-4 mr-1 inline" /> Share
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+                ))}
             {filteredAndSortedBlogs.length === 0 && (
               <div className="col-span-full text-center text-white/60 py-12 text-lg">
                 No blogs found.
               </div>
-            )}
+          )}
           </div>
         </div>
       </div>
