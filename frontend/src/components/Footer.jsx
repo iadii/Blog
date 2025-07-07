@@ -1,4 +1,4 @@
-import { BookOpen } from 'lucide-react';
+import { Feather } from 'lucide-react';
 
 const socials = [
   { href: 'https://github.com/iadii/', label: 'GitHub', icon: (
@@ -24,7 +24,7 @@ const Footer = () => (
         {/* Logo and name */}
         <div className="flex flex-col items-center md:items-start gap-3">
           <div className="flex items-center gap-3">
-            <BookOpen className="w-8 h-8 text-teal-400 drop-shadow-glow" />
+            <Feather className="w-8 h-8 text-teal-400 drop-shadow-glow" />
             <span className="font-serenade text-2xl font-bold text-white drop-shadow-glow">commitKaro()</span>
           </div>
           <div className="flex gap-4 mt-2">

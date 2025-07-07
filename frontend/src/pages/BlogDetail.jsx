@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { useAuth } from '../context/AuthContext';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, BookOpen, Link as LinkIcon, Copy, Globe } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock, Trash2, Edit, Share2, Feather, Link as LinkIcon, Copy, Globe } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const BlogDetail = () => {
@@ -191,7 +191,7 @@ const BlogDetail = () => {
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="text-center relative z-10">
           <div className="w-24 h-24 bg-gradient-to-r from-accent-500/20 to-gold-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <BookOpen className="w-12 h-12 text-accent-400" />
+            <Feather className="w-12 h-12 text-accent-400" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-4">Verse Not Found</h1>
           <p className="text-black-300 mb-6 text-lg">The verse you seek has drifted into the gentle night, or perhaps never graced this garden.</p>

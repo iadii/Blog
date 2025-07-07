@@ -3,7 +3,6 @@ import { useAuth } from '../context/AuthContext';
 import { useBlog } from '../context/BlogContext';
 import { Link } from 'react-router-dom';
 import { 
-  BookOpen, 
   Calendar, 
   Clock, 
   FileText, 
@@ -23,7 +22,8 @@ import {
   MessageCircle,
   Share2,
   Settings,
-  ArrowLeft
+  ArrowLeft,
+  Feather
 } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 

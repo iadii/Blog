@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Save, ArrowLeft, FileText, Type, BookOpen, Share2 } from 'lucide-react';
+import { Save, ArrowLeft, FileText, Type, Feather, Share2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const EditBlog = () => {

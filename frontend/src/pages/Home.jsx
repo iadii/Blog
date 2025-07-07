@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { PenTool, BookOpen, ArrowRight, Star, Heart, Globe, Users, Award, TrendingUp, Feather, Sparkles, CheckCircle } from 'lucide-react';
+import { PenTool, Feather, ArrowRight, Star, Heart, Globe, Users, Award, TrendingUp, Sparkles, CheckCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const features = [
@@ -91,7 +91,7 @@ const Home = () => {
               <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-slide-up">
                 Where stories come alive and voices find their stage. Create, share, and discover extraordinary narratives in our beautiful writing sanctuary.
               </p>
-              <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
+              
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up">
@@ -127,7 +127,7 @@ const Home = () => {
               <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-2xl p-6 backdrop-blur-sm border border-white/10">
-                    <BookOpen className="w-8 h-8 text-teal-300 mb-4" />
+                    <Feather className="w-8 h-8 text-teal-300 mb-4" />
                     <h3 className="text-white font-semibold mb-2">Rich Editor</h3>
                     <p className="text-gray-300 text-sm">Beautiful, distraction-free writing experience</p>
                   </div>

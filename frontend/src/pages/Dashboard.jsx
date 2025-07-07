@@ -11,7 +11,7 @@ import {
   Plus, 
   Search, 
   Filter,
-  BookOpen,
+  Feather,
   TrendingUp,
   Clock,
   FileText,

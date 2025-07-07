@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { PenTool, User, LogOut, Menu, X, BookOpen, UserCircle, LayoutDashboard } from 'lucide-react';
+import { PenTool, User, LogOut, Menu, X, Feather, UserCircle, LayoutDashboard } from 'lucide-react';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -53,7 +53,7 @@ const Navbar = () => {
             className="flex items-center gap-3 text-2xl font-bold text-white hover:opacity-80 transition-all duration-300 group"
           >
             <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <BookOpen className="w-7 h-7 text-white" />
+              <Feather className="w-7 h-7 text-white" />
             </div>
             <span className="font-serenade bg-gradient-to-r from-white to-teal-200 bg-clip-text text-transparent font-bold tracking-tight">commitKaro()</span>
           </Link>

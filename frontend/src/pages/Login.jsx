@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BookOpen, Shield, Mail, Lock } from 'lucide-react';
+import { Feather, Shield, Mail, Lock } from 'lucide-react';
 import { BACKEND_URL } from '../config/config';
 
 const Login = () => {
@@ -48,7 +48,7 @@ const Login = () => {
           {/* Logo and Title */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl mb-6 shadow-lg">
-              <BookOpen className="w-8 h-8 text-white" />
+              <Feather className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Sign in to commitKaro()</h1>
             <p className="text-gray-400">Continue with your Google account</p>
