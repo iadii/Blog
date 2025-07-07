@@ -127,18 +127,18 @@ const Dashboard = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-20" style={{ backgroundColor: '#0A0A0A' }}>
         {/* Hero/Header Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-start mb-4">
+          <div className="flex items-center mb-2">
             <button
               onClick={() => navigate('/')}
-              className="mr-2 w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
+              className="w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
             </button>
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent">Your Dashboard</h1>
           </div>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto text-center">Manage your blogs, track your progress, and share your stories with the world.</p>
-          <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent text-center mb-2">Your Dashboard</h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto text-center mb-2">Manage your blogs, track your progress, and share your stories with the world.</p>
+          <div className="w-full text-center text-xs text-white/60 italic">Thoughts staged. Emotions pushed.</div>
         </div>
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
