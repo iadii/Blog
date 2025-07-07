@@ -180,7 +180,7 @@ const BlogDetail = () => {
 
   if (blogLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black-950 via-black-900 to-black-950 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A0A0A' }}>
         <LoadingSpinner size="large" />
       </div>
     );
@@ -188,8 +188,7 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black-950 via-black-900 to-black-950 flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-grid opacity-5"></div>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="text-center relative z-10">
           <div className="w-24 h-24 bg-gradient-to-r from-accent-500/20 to-gold-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <BookOpen className="w-12 h-12 text-accent-400" />
@@ -205,7 +204,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen relative" style={{ backgroundColor: '#0A0A0A' }}>
+    <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#0A0A0A' }}>
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-teal-900/20 via-emerald-900/20 to-green-900/20"></div>

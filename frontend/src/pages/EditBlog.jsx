@@ -72,18 +72,7 @@ const EditBlog = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-teal-900/20 via-emerald-900/20 to-green-900/20"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/30 to-emerald-400/30 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-emerald-400/30 to-green-400/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-conic from-teal-400/10 via-emerald-400/10 to-green-400/10 rounded-full blur-3xl"></div>
-        {/* Floating particles */}
-        <div className="absolute top-20 left-20 w-2 h-2 bg-white/40 rounded-full animate-float"></div>
-        <div className="absolute top-40 right-32 w-1 h-1 bg-teal-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
-        <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
-      </div>
+      {/* Removed animated background elements for solid background */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-20">
         {/* Hero/Header Section */}
         <div className="text-center mb-12">
@@ -164,7 +153,7 @@ const EditBlog = () => {
               <button
                 type="submit"
                 disabled={isSubmitting || !title.trim() || !content.trim()}
-                className="bg-teal-500 hover:bg-teal-400 text-white font-semibold rounded-xl px-8 py-3 text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg h-fit"
+                className="bg-teal-500 text-white font-semibold rounded-xl px-8 py-3 text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg h-fit"
               >
                 {isSubmitting ? (
                   <LoadingSpinner size="small" />
