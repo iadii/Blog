@@ -65,9 +65,9 @@ const Profile = () => {
     }).length;
 
     const recentBlogs = blogs.slice(0, 5);
-    const mostPopularBlog = blogs.reduce((prev, current) => 
-      getWordCount(prev.content) > getWordCount(current.content) ? prev : current
-    );
+    const mostPopularBlog = blogs.length > 0
+      ? blogs.reduce((prev, current) => getWordCount(prev.content) > getWordCount(current.content) ? prev : current)
+      : null;
 
     return {
       totalWords,
