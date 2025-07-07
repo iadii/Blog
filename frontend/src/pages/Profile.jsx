@@ -133,57 +133,59 @@ const Profile = () => {
           <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
         </div>
         {/* Profile Header */}
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 mb-8 flex flex-col lg:flex-row items-center lg:items-start gap-8">
-          {/* Avatar Section */}
-          <div className="flex flex-col items-center text-center">
-            <div className="relative mb-4">
-              <div className="w-32 h-32 rounded-full border-4 border-teal-500 bg-black-900 flex items-center justify-center overflow-hidden shadow-2xl">
-                <img
-                  src={user?.picture || '/default-avatar.png'}
-                  alt={user?.name}
-                  className="w-full h-full object-cover rounded-full"
-                />
+        <div className="rounded-2xl" style={{ backgroundColor: '#0A0A0A' }}>
+          <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 mb-8 flex flex-col lg:flex-row items-center lg:items-start gap-8">
+            {/* Avatar Section */}
+            <div className="flex flex-col items-center text-center">
+              <div className="relative mb-4">
+                <div className="w-32 h-32 rounded-full border-4 border-teal-500 bg-black-900 flex items-center justify-center overflow-hidden shadow-2xl">
+                  <img
+                    src={user?.picture || '/default-avatar.png'}
+                    alt={user?.name}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center border-2 border-black-900">
+                  <User className="w-4 h-4 text-white" />
+                </div>
               </div>
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center border-2 border-black-900">
-                <User className="w-4 h-4 text-white" />
+              <h2 className="text-2xl font-bold text-white mb-1">{user?.name}</h2>
+              <p className="text-black-300 mb-2">{user?.email}</p>
+              <div className="flex items-center gap-2 text-teal-400">
+                <Award className="w-4 h-4" />
+                <span className="text-sm font-medium">Writer</span>
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-1">{user?.name}</h2>
-            <p className="text-black-300 mb-2">{user?.email}</p>
-            <div className="flex items-center gap-2 text-teal-400">
-              <Award className="w-4 h-4" />
-              <span className="text-sm font-medium">Writer</span>
-            </div>
-          </div>
-          {/* Stats Section */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <FileText className="w-6 h-6 text-teal-400" />
+            {/* Stats Section */}
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="text-center p-4 rounded-xl border border-white/20" style={{ backgroundColor: '#0A0A0A' }}>
+                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <FileText className="w-6 h-6 text-teal-400" />
+                </div>
+                <p className="text-2xl font-bold text-white">{blogs.length}</p>
+                <p className="text-black-300 text-sm">Total Blogs</p>
               </div>
-              <p className="text-2xl font-bold text-white">{blogs.length}</p>
-              <p className="text-black-300 text-sm">Total Blogs</p>
-            </div>
-            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <TrendingUp className="w-6 h-6 text-teal-400" />
+              <div className="text-center p-4 rounded-xl border border-white/20" style={{ backgroundColor: '#0A0A0A' }}>
+                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="w-6 h-6 text-teal-400" />
+                </div>
+                <p className="text-2xl font-bold text-white">{thisMonthBlogs}</p>
+                <p className="text-black-300 text-sm">This Month</p>
               </div>
-              <p className="text-2xl font-bold text-white">{thisMonthBlogs}</p>
-              <p className="text-black-300 text-sm">This Month</p>
-            </div>
-            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-teal-400" />
+              <div className="text-center p-4 rounded-xl border border-white/20" style={{ backgroundColor: '#0A0A0A' }}>
+                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <Clock className="w-6 h-6 text-teal-400" />
+                </div>
+                <p className="text-2xl font-bold text-white">{totalReadTime}</p>
+                <p className="text-black-300 text-sm">Min Read</p>
               </div>
-              <p className="text-2xl font-bold text-white">{totalReadTime}</p>
-              <p className="text-black-300 text-sm">Min Read</p>
-            </div>
-            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
-                <BarChart3 className="w-6 h-6 text-teal-400" />
+              <div className="text-center p-4 rounded-xl border border-white/20" style={{ backgroundColor: '#0A0A0A' }}>
+                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <BarChart3 className="w-6 h-6 text-teal-400" />
+                </div>
+                <p className="text-2xl font-bold text-white">{totalWords.toLocaleString()}</p>
+                <p className="text-black-300 text-sm">Total Words</p>
               </div>
-              <p className="text-2xl font-bold text-white">{totalWords.toLocaleString()}</p>
-              <p className="text-black-300 text-sm">Total Words</p>
             </div>
           </div>
         </div>
@@ -219,7 +221,7 @@ const Profile = () => {
             <div className="space-y-6">
               {/* Blog Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="card bg-gradient-to-r from-accent-500/10 to-accent-600/10 border-accent-500/20">
+                <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center">
                       <FileText className="w-6 h-6 text-accent-400" />
@@ -231,7 +233,7 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div className="card bg-gradient-to-r from-gold-500/10 to-gold-600/10 border-gold-500/20">
+                <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center">
                       <Clock className="w-6 h-6 text-gold-400" />
@@ -243,7 +245,7 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div className="card bg-gradient-to-r from-purple-500/10 to-purple-600/10 border-purple-500/20">
+                <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
                       <BarChart3 className="w-6 h-6 text-purple-400" />
@@ -257,7 +259,7 @@ const Profile = () => {
               </div>
 
               {/* Blog List */}
-              <div className="card bg-black-800/30 border-black-700">
+              <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-accent-400" />
                   All Blogs ({blogs.length})
@@ -319,7 +321,7 @@ const Profile = () => {
 
           {activeTab === 'analytics' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="card bg-black-800/30 border-black-700">
+              <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-accent-400" />
                   Writing Analytics
@@ -344,7 +346,7 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="card bg-black-800/30 border-black-700">
+              <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-gold-400" />
                   Monthly Progress
@@ -367,7 +369,7 @@ const Profile = () => {
           )}
 
           {activeTab === 'settings' && (
-            <div className="card bg-black-800/30 border-black-700">
+            <div className="card" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <Settings className="w-5 h-5 text-accent-400" />
                 Account Settings
@@ -411,7 +413,7 @@ const Profile = () => {
       {/* Delete Confirmation Modal */}
       {deleteConfirm && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="card max-w-md w-full bg-black-800/90 backdrop-blur-xl border-black-700">
+          <div className="card max-w-md w-full" style={{ backgroundColor: '#0A0A0A', border: '1px solid #222' }}>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
                 <Trash2 className="w-6 h-6 text-red-400" />
