@@ -193,7 +193,7 @@ const Dashboard = () => {
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="bg-black-900/60 border border-white/10 rounded-xl px-6 py-3 pr-12 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition flex-shrink-0"
+                className="bg-black-900/60 border border-white/10 rounded-xl px-6 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition flex-shrink-0"
               >
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
