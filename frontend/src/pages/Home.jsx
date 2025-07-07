@@ -183,7 +183,7 @@ const Home = () => {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Loved by Writers Worldwide</h2>
               <p className="text-xl text-gray-300">See what our community has to say</p>
-              <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
+              
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
