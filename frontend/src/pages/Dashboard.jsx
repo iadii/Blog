@@ -130,7 +130,7 @@ const Dashboard = () => {
           <div className="flex items-center mb-4">
             <button
               onClick={() => navigate('/')}
-              className="w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
+              className="w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 transition-all duration-200"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
@@ -204,7 +204,7 @@ const Dashboard = () => {
             <div className="flex-shrink-0 flex justify-end">
               <Link
                 to="/create"
-                className="px-8 py-3 rounded-xl bg-teal-500 text-white font-semibold text-lg hover:bg-teal-400 transition flex items-center gap-2"
+                className="px-8 py-3 rounded-xl bg-teal-500 text-white font-semibold text-lg transition flex items-center gap-2"
               >
                 <Plus className="w-5 h-5" />
                 <span>New Blog</span>
@@ -215,11 +215,11 @@ const Dashboard = () => {
           <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
             {filteredAndSortedBlogs.map((blog) => (
               <div key={blog._id} className="group relative">
-                <div className="rounded-2xl border border-white/10 p-6 h-full flex flex-col shadow-xl transition-transform duration-300 bg-[#0A0A0A] hover:scale-[1.025] hover:border-teal-400/40">
+                <div className="rounded-2xl border border-white/10 p-6 h-full flex flex-col shadow-xl transition-transform duration-300 bg-[#0A0A0A]">
                   {/* Blog Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
+                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 transition-colors duration-200">
                         {blog.title}
                       </h3>
                       <div className="flex items-center gap-3 text-sm text-gray-400">
@@ -244,28 +244,28 @@ const Dashboard = () => {
                   <div className="flex items-center gap-3 mt-auto justify-end">
                     <Link
                       to={`/blog/${blog._id}`}
-                      className="p-2 rounded-full hover:bg-teal-900/40 transition"
+                      className="p-2 rounded-full transition"
                       title="View"
                     >
                       <Eye className="w-5 h-5 text-teal-400" />
                     </Link>
                     <Link
                       to={`/edit/${blog._id}`}
-                      className="p-2 rounded-full hover:bg-emerald-900/40 transition"
+                      className="p-2 rounded-full transition"
                       title="Edit"
                     >
                       <Edit3 className="w-5 h-5 text-emerald-400" />
                     </Link>
                     <button
                       onClick={() => setDeleteConfirm(blog._id)}
-                      className="p-2 rounded-full hover:bg-red-900/40 transition"
+                      className="p-2 rounded-full transition"
                       title="Delete"
                     >
                       <Trash2 className="w-5 h-5 text-red-400" />
                     </button>
                     <button
                       onClick={() => handleShare(blog)}
-                      className="p-2 rounded-full hover:bg-gray-800/40 transition"
+                      className="p-2 rounded-full transition"
                       title="Share"
                     >
                       <Share2 className="w-5 h-5 text-gray-400" />
@@ -292,13 +292,13 @@ const Dashboard = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setDeleteConfirm(null)}
-                className="flex-1 px-4 py-2 text-black-300 border border-black-600 rounded-xl hover:bg-black-700 transition-colors duration-200"
+                className="flex-1 px-4 py-2 text-black-300 border border-black-600 rounded-xl transition-colors duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirm)}
-                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors duration-200"
+                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-xl transition-colors duration-200"
               >
                 Delete
               </button>
