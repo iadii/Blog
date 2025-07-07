@@ -135,6 +135,14 @@ const Dashboard = () => {
         <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
         <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
       </div>
+      {/* Back Button Top Left */}
+      <button
+        onClick={() => navigate('/')} 
+        className="fixed top-6 left-6 z-20 w-14 h-14 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
+        aria-label="Back to Home"
+      >
+        <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
+      </button>
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
         {/* Hero/Header Section */}
         <div className="text-center mb-12">
@@ -183,107 +191,104 @@ const Dashboard = () => {
         {/* Blog List Section */}
         <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
-            <div className="flex-1 flex flex-col md:flex-row md:items-center gap-4">
-              <button
-                onClick={() => navigate('/')}
-                className="w-14 h-14 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
-                aria-label="Back to Home"
-              >
-                <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
-              </button>
-                  <input
-                    type="text"
+            {/* Left controls: Search, Sort */}
+            <div className="flex flex-1 items-center gap-4 min-w-0">
+              <input
+                type="text"
                 placeholder="Search blogs..."
-                    value={searchTerm}
+                value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 className="w-full md:w-72 bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
-                  />
-                    <select
-                      value={sortBy}
+              />
+              <select
+                value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
-                    >
+                className="bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition flex-shrink-0"
+              >
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
                 <option value="title">Title</option>
-                    </select>
-                  </div>
-            <Link
-              to="/create"
-              className="px-8 py-3 rounded-xl bg-teal-500 text-white font-semibold text-lg hover:bg-teal-400 transition flex items-center gap-2"
-            >
-              <Plus className="w-5 h-5" />
-              <span>New Blog</span>
-            </Link>
-                      </div>
+              </select>
+            </div>
+            {/* Right: New Blog button */}
+            <div className="flex-shrink-0 flex justify-end">
+              <Link
+                to="/create"
+                className="px-8 py-3 rounded-xl bg-teal-500 text-white font-semibold text-lg hover:bg-teal-400 transition flex items-center gap-2"
+              >
+                <Plus className="w-5 h-5" />
+                <span>New Blog</span>
+              </Link>
+            </div>
+          </div>
           {/* Blog Cards */}
-              <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
-                {filteredAndSortedBlogs.map((blog) => (
-                  <div key={blog._id} className="group relative">
-                    <div className="rounded-2xl border border-white/10 p-6 h-full flex flex-col shadow-xl transition-transform duration-300 bg-[#0A0A0A] hover:scale-[1.025] hover:border-teal-400/40">
-                      {/* Blog Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
-                            {blog.title}
-                          </h3>
-                          <div className="flex items-center gap-3 text-sm text-gray-400">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="w-4 h-4" />
-                              <span>{formatDate(blog.createdAt)}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              <span>{getReadTime(blog.content)} min read</span>
-                            </div>
-                          </div>
+          <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6'}>
+            {filteredAndSortedBlogs.map((blog) => (
+              <div key={blog._id} className="group relative">
+                <div className="rounded-2xl border border-white/10 p-6 h-full flex flex-col shadow-xl transition-transform duration-300 bg-[#0A0A0A] hover:scale-[1.025] hover:border-teal-400/40">
+                  {/* Blog Header */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-teal-400 transition-colors duration-200">
+                        {blog.title}
+                      </h3>
+                      <div className="flex items-center gap-3 text-sm text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{formatDate(blog.createdAt)}</span>
                         </div>
-                      </div>
-                      {/* Blog Content Preview */}
-                      <div className="mb-6">
-                        <p className="text-gray-300 line-clamp-3 leading-relaxed">
-                          {truncateContent(blog.content)}
-                        </p>
-                      </div>
-                      {/* Action Icons Bottom Right */}
-                      <div className="flex items-center gap-3 mt-auto justify-end">
-                        <Link
-                          to={`/blog/${blog._id}`}
-                          className="p-2 rounded-full hover:bg-teal-900/40 transition"
-                          title="View"
-                        >
-                          <Eye className="w-5 h-5 text-teal-400" />
-                        </Link>
-                        <Link
-                          to={`/edit/${blog._id}`}
-                          className="p-2 rounded-full hover:bg-emerald-900/40 transition"
-                          title="Edit"
-                        >
-                          <Edit3 className="w-5 h-5 text-emerald-400" />
-                        </Link>
-                        <button
-                          onClick={() => setDeleteConfirm(blog._id)}
-                          className="p-2 rounded-full hover:bg-red-900/40 transition"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-5 h-5 text-red-400" />
-                        </button>
-                        <button
-                          onClick={() => handleShare(blog)}
-                          className="p-2 rounded-full hover:bg-gray-800/40 transition"
-                          title="Share"
-                        >
-                          <Share2 className="w-5 h-5 text-gray-400" />
-                        </button>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{getReadTime(blog.content)} min read</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                  {/* Blog Content Preview */}
+                  <div className="mb-6">
+                    <p className="text-gray-300 line-clamp-3 leading-relaxed">
+                      {truncateContent(blog.content)}
+                    </p>
+                  </div>
+                  {/* Action Icons Bottom Right */}
+                  <div className="flex items-center gap-3 mt-auto justify-end">
+                    <Link
+                      to={`/blog/${blog._id}`}
+                      className="p-2 rounded-full hover:bg-teal-900/40 transition"
+                      title="View"
+                    >
+                      <Eye className="w-5 h-5 text-teal-400" />
+                    </Link>
+                    <Link
+                      to={`/edit/${blog._id}`}
+                      className="p-2 rounded-full hover:bg-emerald-900/40 transition"
+                      title="Edit"
+                    >
+                      <Edit3 className="w-5 h-5 text-emerald-400" />
+                    </Link>
+                    <button
+                      onClick={() => setDeleteConfirm(blog._id)}
+                      className="p-2 rounded-full hover:bg-red-900/40 transition"
+                      title="Delete"
+                    >
+                      <Trash2 className="w-5 h-5 text-red-400" />
+                    </button>
+                    <button
+                      onClick={() => handleShare(blog)}
+                      className="p-2 rounded-full hover:bg-gray-800/40 transition"
+                      title="Share"
+                    >
+                      <Share2 className="w-5 h-5 text-gray-400" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
             {filteredAndSortedBlogs.length === 0 && (
               <div className="col-span-full text-center text-white/60 py-12 text-lg">
                 No blogs found.
               </div>
-          )}
+            )}
           </div>
         </div>
       </div>
