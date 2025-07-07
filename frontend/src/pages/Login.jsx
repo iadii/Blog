@@ -34,8 +34,8 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-4xl flex flex-col md:flex-row bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl shadow-2xl overflow-hidden">
         {/* Left: Project Info */}
         <div className="hidden md:flex flex-col justify-center items-start p-10 w-1/2 bg-gradient-to-br from-teal-900/60 to-emerald-900/60">
-          <h2 className="text-4xl font-bold text-white mb-4">Welcome to Serenade Ink</h2>
-          <p className="text-lg text-gray-300 mb-6">Serenade Ink is your creative sanctuary for writing, sharing, and discovering stories. Join a vibrant community of writers and readers, and let your voice be heard across the globe.</p>
+          <h2 className="text-4xl font-bold text-white mb-4">Welcome to commitKaro()</h2>
+          <p className="text-lg text-gray-300 mb-6">commitKaro() is your creative sanctuary for writing, sharing, and discovering stories. Join a vibrant community of writers and readers, and let your voice be heard across the globe.</p>
           <ul className="text-gray-200 space-y-2">
             <li>• Distraction-free writing experience</li>
             <li>• Connect with a global audience</li>
@@ -50,7 +50,7 @@ const Login = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl mb-6 shadow-lg">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Sign in to Serenade Ink</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">Sign in to commitKaro()</h1>
             <p className="text-gray-400">Continue with your Google account</p>
           </div>
           {/* Google Login Only */}
@@ -78,6 +78,8 @@ const Login = () => {
             </svg>
             <span>Continue with Google</span>
           </button>
+          {/* Disclaimer */}
+          <div className="w-full text-center text-xs text-white/60 italic mt-8">Thoughts staged. Emotions pushed.</div>
         </div>
       </div>
     </div>

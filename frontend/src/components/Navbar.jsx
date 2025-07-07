@@ -55,8 +55,11 @@ const Navbar = () => {
             <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
               <BookOpen className="w-7 h-7 text-white" />
             </div>
-            <span className="bg-gradient-to-r from-white to-teal-200 bg-clip-text text-transparent font-bold tracking-tight">Serenade Ink</span>
+            <span className="font-serenade bg-gradient-to-r from-white to-teal-200 bg-clip-text text-transparent font-bold tracking-tight">commitKaro()</span>
           </Link>
+
+          {/* Disclaimer */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 text-xs text-white/60 italic pb-1">Thoughts staged. Emotions pushed.</div>
 
           {/* Center nav links (optional) */}
           {/* <div className="hidden md:flex gap-8 text-white/80 font-medium text-lg">

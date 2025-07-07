@@ -35,7 +35,7 @@ const testimonials = [
     name: 'Sarah Chen',
     role: 'Travel Blogger',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-    quote: 'Serenade Ink transformed how I share my adventures. The platform is intuitive and my stories reach more readers than ever.',
+    quote: 'commitKaro() transformed how I share my adventures. The platform is intuitive and my stories reach more readers than ever.',
     rating: 5
   },
   {
@@ -86,11 +86,12 @@ const Home = () => {
           <div className="max-w-7xl mx-auto text-center">
             <div className="mb-8">
               <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent mb-6 animate-fade-in">
-                Serenade Ink
+                commitKaro()
               </h1>
               <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-slide-up">
                 Where stories come alive and voices find their stage. Create, share, and discover extraordinary narratives in our beautiful writing sanctuary.
               </p>
+              <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up">
@@ -150,7 +151,7 @@ const Home = () => {
         <section id="features" className="py-20">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Why Choose Serenade Ink?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Why Choose commitKaro()?</h2>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 Discover the tools and community that will elevate your writing to new heights
               </p>
@@ -182,6 +183,7 @@ const Home = () => {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Loved by Writers Worldwide</h2>
               <p className="text-xl text-gray-300">See what our community has to say</p>
+              <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -225,7 +227,7 @@ const Home = () => {
                 Ready to Share Your Story?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of writers who have found their voice on Serenade Ink. Your audience is waiting.
+                Join thousands of writers who have found their voice on commitKaro(). Your audience is waiting.
               </p>
               
               {!isAuthenticated && (

@@ -130,6 +130,7 @@ const Profile = () => {
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent mb-4">Your Profile</h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">Track your writing journey, see your progress, and manage your content.</p>
+          <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
         </div>
         {/* Profile Header */}
         <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 mb-8 flex flex-col lg:flex-row items-center lg:items-start gap-8">

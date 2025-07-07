@@ -59,6 +59,7 @@ const CreateBlog = () => {
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent mb-4">Create a New Blog</h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">Share your story with the world. Fill in the details below and let your creativity flow!</p>
+          <div className="w-full text-center text-xs text-white/60 italic mt-4">Thoughts staged. Emotions pushed.</div>
         </div>
         {/* Main Content: Two-column layout on desktop, stacked on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
