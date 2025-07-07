@@ -58,15 +58,7 @@ const Navbar = () => {
             <span className="font-serenade bg-gradient-to-r from-white to-teal-200 bg-clip-text text-transparent font-bold tracking-tight">commitKaro()</span>
           </Link>
 
-          {/* Disclaimer */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 bottom-0 text-xs text-white/60 italic pb-1">Thoughts staged. Emotions pushed.</div>
-
-          {/* Center nav links (optional) */}
-          {/* <div className="hidden md:flex gap-8 text-white/80 font-medium text-lg">
-            <Link to="/" className="hover:text-teal-400 transition">Home</Link>
-            <Link to="/explore" className="hover:text-teal-400 transition">Explore</Link>
-            <Link to="/about" className="hover:text-teal-400 transition">About</Link>
-          </div> */}
+         
 
           {/* Desktop Right Side */}
           <div className="hidden md:flex items-center gap-4">
