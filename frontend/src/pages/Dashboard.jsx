@@ -245,31 +245,35 @@ const Dashboard = () => {
                           {truncateContent(blog.content)}
                         </p>
                       </div>
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-3 mt-auto">
+                      {/* Action Icons Bottom Right */}
+                      <div className="flex items-center gap-3 mt-auto justify-end">
                         <Link
                           to={`/blog/${blog._id}`}
-                          className="px-4 py-2 rounded-lg bg-teal-500 text-white font-semibold text-sm hover:bg-teal-400 transition flex items-center gap-1"
+                          className="p-2 rounded-full hover:bg-teal-900/40 transition"
+                          title="View"
                         >
-                          <Eye className="w-4 h-4" /> View
+                          <Eye className="w-5 h-5 text-teal-400" />
                         </Link>
                         <Link
                           to={`/edit/${blog._id}`}
-                          className="px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold text-sm hover:bg-emerald-400 transition flex items-center gap-1"
+                          className="p-2 rounded-full hover:bg-emerald-900/40 transition"
+                          title="Edit"
                         >
-                          <Edit3 className="w-4 h-4" /> Edit
+                          <Edit3 className="w-5 h-5 text-emerald-400" />
                         </Link>
                         <button
                           onClick={() => setDeleteConfirm(blog._id)}
-                          className="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold text-sm hover:bg-red-400 transition flex items-center gap-1"
+                          className="p-2 rounded-full hover:bg-red-900/40 transition"
+                          title="Delete"
                         >
-                          <Trash2 className="w-4 h-4" /> Delete
+                          <Trash2 className="w-5 h-5 text-red-400" />
                         </button>
                         <button
                           onClick={() => handleShare(blog)}
-                          className="px-4 py-2 rounded-lg bg-gray-700 text-white font-semibold text-sm hover:bg-gray-600 transition flex items-center gap-1"
+                          className="p-2 rounded-full hover:bg-gray-800/40 transition"
+                          title="Share"
                         >
-                          <Share2 className="w-4 h-4" /> Share
+                          <Share2 className="w-5 h-5 text-gray-400" />
                         </button>
                       </div>
                     </div>
