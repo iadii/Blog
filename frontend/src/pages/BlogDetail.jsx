@@ -212,7 +212,7 @@ const BlogDetail = () => {
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-black-400 transition-colors duration-200 p-3 backdrop-blur-xl rounded-xl border border-black-700"
+            className="flex items-center gap-2 text-black-400 p-3 backdrop-blur-xl rounded-xl border border-black-700"
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">Back to Home</span>
@@ -223,7 +223,7 @@ const BlogDetail = () => {
             {isOwner && (
               <button
                 onClick={handleToggleShare}
-                className={`p-3 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 ${
+                className={`p-3 backdrop-blur-xl rounded-xl border border-black-700 ${
                   isShared 
                     ? 'text-red-400' 
                     : 'text-green-400'
@@ -238,7 +238,7 @@ const BlogDetail = () => {
             {!isOwner && isShared && (
               <button
                 onClick={handleCopyLink}
-                className="p-3 text-blue-400 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700"
+                className="p-3 text-blue-400 backdrop-blur-xl rounded-xl border border-black-700"
                 title="Copy share link"
               >
                 <LinkIcon className="w-5 h-5" />
@@ -250,14 +250,14 @@ const BlogDetail = () => {
               <>
                 <Link
                   to={`/blog/${id}/edit`}
-                  className="p-3 text-blue-400 rounded-xl transition-all duration-200 border border-black-700"
+                  className="p-3 text-blue-400 rounded-xl border border-black-700"
                   title="Edit blog"
                 >
                   <Edit className="w-5 h-5" />
                 </Link>
                 <button
                   onClick={() => setDeleteConfirm(true)}
-                  className="p-3 text-red-400 rounded-xl transition-all duration-200 border border-black-700"
+                  className="p-3 text-red-400 rounded-xl border border-black-700"
                   title="Delete blog"
                 >
                   <Trash2 className="w-5 h-5" />
