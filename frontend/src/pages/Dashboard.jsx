@@ -135,8 +135,8 @@ const Dashboard = () => {
             >
               <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
             </button>
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent">Your Dashboard</h1>
           </div>
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent">Your Dashboard</h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto text-center mb-2">Manage your blogs, track your progress, and share your stories with the world.</p>
           
         </div>
