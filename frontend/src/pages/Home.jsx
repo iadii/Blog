@@ -34,7 +34,7 @@ const testimonials = [
   {
     name: 'Sarah Chen',
     role: 'Travel Blogger',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    avatar: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=facearea&w=150&h=150&facepad=2',
     quote: 'commitKaro() transformed how I share my adventures. The platform is intuitive and my stories reach more readers than ever.',
     rating: 5
   },
@@ -181,7 +181,7 @@ const Home = () => {
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Loved by Writers Worldwide</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Loved by Writers</h2>
               <p className="text-xl text-gray-300">See what our community has to say</p>
               
             </div>
@@ -227,7 +227,7 @@ const Home = () => {
                 Ready to Share Your Story?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of writers who have found their voice on commitKaro(). Your audience is waiting.
+                Join writers who have found their voice on commitKaro(). Your audience is waiting.
               </p>
               
               {!isAuthenticated && (
