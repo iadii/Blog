@@ -135,13 +135,13 @@ const Dashboard = () => {
         <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
         <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
       </div>
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20" style={{ backgroundColor: '#0A0A0A' }}>
         {/* Hero/Header Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-center gap-4 mb-4">
+          <div className="flex items-center justify-center mb-4">
             <button
               onClick={() => navigate('/')}
-              className="w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
+              className="mr-2 w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
