@@ -281,21 +281,21 @@ const Profile = () => {
                       <div className="flex items-center gap-2">
                         <Link
                           to={`/blog/${blog._id}`}
-                          className="p-2 text-gray-400 rounded-lg transition-all duration-200"
+                          className="p-2 text-gray-400 rounded-lg"
                           title="View blog"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
                         <Link
                           to={`/blog/${blog._id}/edit`}
-                          className="p-2 text-gray-400 rounded-lg transition-all duration-200"
+                          className="p-2 text-gray-400 rounded-lg"
                           title="Edit blog"
                         >
                           <Edit3 className="w-4 h-4" />
                         </Link>
                         <button
                           onClick={() => setDeleteConfirm(blog._id)}
-                          className="p-2 text-gray-400 rounded-lg transition-all duration-200"
+                          className="p-2 text-gray-400 rounded-lg"
                           title="Delete blog"
                         >
                           <Trash2 className="w-4 h-4" />
