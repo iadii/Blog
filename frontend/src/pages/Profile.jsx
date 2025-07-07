@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 
+
 const Profile = () => {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const { blogs, loading, deleteBlog } = useBlog();
