@@ -215,7 +215,7 @@ const BlogDetail = () => {
             className="flex items-center gap-2 text-black-400 p-3 backdrop-blur-xl rounded-xl border border-black-700"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Back to Home</span>
+            {/* <span className="font-medium">Back to Home</span> */}
           </button>
           
           <div className="flex items-center gap-2">
