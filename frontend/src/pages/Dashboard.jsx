@@ -250,7 +250,7 @@ const Dashboard = () => {
                       <Eye className="w-5 h-5 text-teal-400" />
                     </Link>
                     <Link
-                      to={`/edit/${blog._id}`}
+                      to={`/blog/${blog._id}/edit`}
                       className="p-2 rounded-full transition"
                       title="Edit"
                     >
