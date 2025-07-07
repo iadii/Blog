@@ -127,7 +127,7 @@ const Dashboard = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-20" style={{ backgroundColor: '#0A0A0A' }}>
         {/* Hero/Header Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-start mb-4">
             <button
               onClick={() => navigate('/')}
               className="mr-2 w-12 h-12 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200"
