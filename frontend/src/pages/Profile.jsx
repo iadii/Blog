@@ -203,7 +203,7 @@ const Profile = () => {
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 ${
                   activeTab === tab.id
                     ? 'bg-gradient-to-r from-accent-600 to-accent-500 text-white shadow-neon'
-                    : 'text-black-300 hover:text-white hover:bg-black-800/50'
+                    : 'text-black-300'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -433,7 +433,7 @@ const Profile = () => {
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirm)}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
+                className="bg-red-600 text-white px-4 py-3 rounded-xl font-medium transition-all duration-200 flex-1"
               >
                 Delete
               </button>
