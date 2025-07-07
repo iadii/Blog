@@ -104,92 +104,85 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black-950 via-black-900 to-black-950 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A0A0A' }}>
         <LoadingSpinner size="large" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black-950 via-black-900 to-black-950">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-grid opacity-5"></div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Link
-            to="/"
-            className="p-3 text-black-400 hover:text-white hover:bg-black-800/50 backdrop-blur-xl rounded-xl transition-all duration-200 border border-black-700 hover:border-accent-500/50"
-          >
-            <ArrowLeft className="w-6 h-6" />
-          </Link>
-          <div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-white">Your Profile</h1>
-            <p className="text-black-300 text-lg">Track your writing journey, see your progress, and manage your content.</p>
-          </div>
-        </div>
+    <div className="min-h-screen relative" style={{ backgroundColor: '#0A0A0A' }}>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-teal-900/20 via-emerald-900/20 to-green-900/20"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/30 to-emerald-400/30 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-emerald-400/30 to-green-400/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-conic from-teal-400/10 via-emerald-400/10 to-green-400/10 rounded-full blur-3xl"></div>
+        {/* Floating particles */}
+        <div className="absolute top-20 left-20 w-2 h-2 bg-white/40 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-32 w-1 h-1 bg-teal-400/60 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
+        <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
+      </div>
 
+      <div className="max-w-5xl mx-auto px-4 py-20 relative z-10">
+        {/* Hero/Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent mb-4">Your Profile</h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">Track your writing journey, see your progress, and manage your content.</p>
+        </div>
         {/* Profile Header */}
-        <div className="card bg-black-800/30 border-black-700 mb-8">
-          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-            {/* Avatar Section */}
-            <div className="flex flex-col items-center text-center">
-              <div className="relative mb-4">
-                <div className="w-32 h-32 rounded-full border-4 border-accent-500 bg-black-900 flex items-center justify-center overflow-hidden shadow-2xl">
-                  <img
-                    src={user?.picture || '/default-avatar.png'}
-                    alt={user?.name}
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center border-2 border-black-900">
-                  <User className="w-4 h-4 text-white" />
-                </div>
+        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 mb-8 flex flex-col lg:flex-row items-center lg:items-start gap-8">
+          {/* Avatar Section */}
+          <div className="flex flex-col items-center text-center">
+            <div className="relative mb-4">
+              <div className="w-32 h-32 rounded-full border-4 border-teal-500 bg-black-900 flex items-center justify-center overflow-hidden shadow-2xl">
+                <img
+                  src={user?.picture || '/default-avatar.png'}
+                  alt={user?.name}
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-1">{user?.name}</h2>
-              <p className="text-black-300 mb-2">{user?.email}</p>
-              <div className="flex items-center gap-2 text-accent-400">
-                <Award className="w-4 h-4" />
-                <span className="text-sm font-medium">Writer</span>
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center border-2 border-black-900">
+                <User className="w-4 h-4 text-white" />
               </div>
             </div>
-
-            {/* Stats Section */}
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="text-center p-4 bg-gradient-to-r from-accent-500/10 to-accent-600/10 rounded-xl border border-accent-500/20">
-                <div className="w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <FileText className="w-6 h-6 text-accent-400" />
-                </div>
-                <p className="text-2xl font-bold text-white">{blogs.length}</p>
-                <p className="text-black-300 text-sm">Total Blogs</p>
+            <h2 className="text-2xl font-bold text-white mb-1">{user?.name}</h2>
+            <p className="text-black-300 mb-2">{user?.email}</p>
+            <div className="flex items-center gap-2 text-teal-400">
+              <Award className="w-4 h-4" />
+              <span className="text-sm font-medium">Writer</span>
+            </div>
+          </div>
+          {/* Stats Section */}
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <FileText className="w-6 h-6 text-teal-400" />
               </div>
-
-              <div className="text-center p-4 bg-gradient-to-r from-gold-500/10 to-gold-600/10 rounded-xl border border-gold-500/20">
-                <div className="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="w-6 h-6 text-gold-400" />
-                </div>
-                <p className="text-2xl font-bold text-white">{thisMonthBlogs}</p>
-                <p className="text-black-300 text-sm">This Month</p>
+              <p className="text-2xl font-bold text-white">{blogs.length}</p>
+              <p className="text-black-300 text-sm">Total Blogs</p>
+            </div>
+            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <TrendingUp className="w-6 h-6 text-teal-400" />
               </div>
-
-              <div className="text-center p-4 bg-gradient-to-r from-gray-500/10 to-gray-600/10 rounded-xl border border-gray-500/20">
-                <div className="w-12 h-12 bg-gray-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Clock className="w-6 h-6 text-gray-400" />
-                </div>
-                <p className="text-2xl font-bold text-white">{totalReadTime}</p>
-                <p className="text-black-300 text-sm">Min Read</p>
+              <p className="text-2xl font-bold text-white">{thisMonthBlogs}</p>
+              <p className="text-black-300 text-sm">This Month</p>
+            </div>
+            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <Clock className="w-6 h-6 text-teal-400" />
               </div>
-
-              <div className="text-center p-4 bg-gradient-to-r from-purple-500/10 to-purple-600/10 rounded-xl border border-purple-500/20">
-                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <BarChart3 className="w-6 h-6 text-purple-400" />
-                </div>
-                <p className="text-2xl font-bold text-white">{totalWords.toLocaleString()}</p>
-                <p className="text-black-300 text-sm">Total Words</p>
+              <p className="text-2xl font-bold text-white">{totalReadTime}</p>
+              <p className="text-black-300 text-sm">Min Read</p>
+            </div>
+            <div className="text-center p-4 bg-white/10 rounded-xl border border-white/20">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <BarChart3 className="w-6 h-6 text-teal-400" />
               </div>
+              <p className="text-2xl font-bold text-white">{totalWords.toLocaleString()}</p>
+              <p className="text-black-300 text-sm">Total Words</p>
             </div>
           </div>
         </div>

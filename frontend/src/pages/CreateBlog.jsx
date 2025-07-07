@@ -41,40 +41,31 @@ const CreateBlog = () => {
   const estimatedReadTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black-950 via-black-900 to-black-950 relative overflow-x-hidden">
-      {/* Layered Animated Backgrounds */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-black-900 via-black-950 to-black-900 opacity-95"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80')] bg-cover bg-center opacity-10"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-teal-400/20 via-white/20 to-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[32rem] h-[32rem] bg-gradient-to-br from-teal-400/20 via-white/20 to-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-conic from-teal-400/10 via-white/10 to-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 right-10 w-40 h-40 bg-white/10 rounded-3xl blur-2xl"></div>
-        <div className="absolute bottom-10 left-10 w-32 h-32 bg-teal-400/10 rounded-full blur-2xl"></div>
+    <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-teal-900/20 via-emerald-900/20 to-green-900/20"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/30 to-emerald-400/30 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-emerald-400/30 to-green-400/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-conic from-teal-400/10 via-emerald-400/10 to-green-400/10 rounded-full blur-3xl"></div>
+        {/* Floating particles */}
+        <div className="absolute top-20 left-20 w-2 h-2 bg-white/40 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-32 w-1 h-1 bg-teal-400/60 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
+        <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-10">
-          <button
-            onClick={handleBack}
-            className="w-14 h-14 flex items-center justify-center text-white rounded-2xl border border-white/10 bg-black-900/80 hover:bg-black-800/80 hover:border-teal-400/40 transition-all duration-200 shadow-lg"
-            aria-label="Back to Home"
-          >
-            <ArrowLeft className="w-7 h-7" strokeWidth={2.2} />
-          </button>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-black-900 rounded-xl flex items-center justify-center shadow-md">
-              <BookOpen className="w-6 h-6 text-teal-400 drop-shadow-glow" />
-            </div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">Create New Post</h1>
-          </div>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-20">
+        {/* Hero/Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-teal-200 to-emerald-200 bg-clip-text text-transparent mb-4">Create a New Blog</h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">Share your story with the world. Fill in the details below and let your creativity flow!</p>
         </div>
         {/* Main Content: Two-column layout on desktop, stacked on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {/* Form Section */}
-          <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-8">
+          <form onSubmit={handleSubmit} className="md:col-span-2 space-y-8">
             {/* Title Input */}
-            <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6 mb-2">
+            <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6">
               <label htmlFor="title" className="text-lg font-bold text-white flex items-center gap-2 mb-2">
                 <Type className="w-5 h-5 text-teal-400" />
                 Blog Title
@@ -95,7 +86,7 @@ const CreateBlog = () => {
               </div>
             </div>
             {/* Content Editor Card */}
-            <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6">
+            <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6">
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="w-5 h-5 text-teal-400" />
                 <label htmlFor="content" className="text-lg font-bold text-white">
@@ -117,7 +108,7 @@ const CreateBlog = () => {
               />
             </div>
             {/* Sharing Toggle */}
-            <div className="rounded-2xl bg-black-800/60 border border-white/10 shadow-lg p-6">
+            <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Share2 className="w-5 h-5 text-teal-400" />
@@ -137,7 +128,6 @@ const CreateBlog = () => {
                 </label>
               </div>
             </div>
-
             {/* Publish Button OUTSIDE the card, aligned right */}
             <div className="w-full flex justify-end mt-4">
               <button
@@ -153,7 +143,7 @@ const CreateBlog = () => {
             </div>
           </form>
           {/* Live Preview Section (right side on desktop, below on mobile) */}
-          <div className="rounded-2xl bg-black-800/40 border border-white/10 shadow-lg p-6 lg:sticky lg:top-28 lg:self-start max-h-[340px] overflow-y-auto min-h-[220px] flex flex-col">
+          <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 lg:sticky lg:top-28 lg:self-start max-h-[340px] overflow-y-auto min-h-[220px] flex flex-col">
             <h3 className="text-base font-bold text-white mb-2 flex items-center gap-2">
               <span className="text-xl">📖</span>
               <span>Live Preview</span>
@@ -178,9 +168,7 @@ const CreateBlog = () => {
       </div>
       {/* <Footer/> */}
     </div>
-    
   );
-
 };
 
 export default CreateBlog;

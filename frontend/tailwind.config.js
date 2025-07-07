@@ -62,6 +62,7 @@ export default {
         display: ['Clash Display', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         'serenade': ['"Parisienne"', 'cursive'],
+        'poppins': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
