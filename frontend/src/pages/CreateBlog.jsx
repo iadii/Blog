@@ -42,18 +42,7 @@ const CreateBlog = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-teal-900/20 via-emerald-900/20 to-green-900/20"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/30 to-emerald-400/30 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-emerald-400/30 to-green-400/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-conic from-teal-400/10 via-emerald-400/10 to-green-400/10 rounded-full blur-3xl"></div>
-        {/* Floating particles */}
-        <div className="absolute top-20 left-20 w-2 h-2 bg-white/40 rounded-full animate-float"></div>
-        <div className="absolute top-40 right-32 w-1 h-1 bg-teal-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-float"></div>
-        <div className="absolute top-1/3 right-20 w-1 h-1 bg-green-400/60 rounded-full animate-pulse"></div>
-      </div>
+      {/* Removed animated background elements for solid background */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-20">
         {/* Hero/Header Section */}
         <div className="text-center mb-12">
@@ -107,27 +96,6 @@ const CreateBlog = () => {
                 className="w-full min-h-[120px] max-h-[220px] text-base leading-relaxed bg-black-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition"
                 rows={6}
               />
-            </div>
-            {/* Sharing Toggle */}
-            <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Share2 className="w-5 h-5 text-teal-400" />
-                  <div>
-                    <label className="text-lg font-bold text-white">Share this blog</label>
-                    <p className="text-sm text-white/60">Make this blog publicly accessible via link</p>
-                  </div>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={shared}
-                    onChange={(e) => setShared(e.target.checked)}
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-black-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-teal-500"></div>
-                </label>
-              </div>
             </div>
             {/* Publish Button OUTSIDE the card, aligned right */}
             <div className="w-full flex justify-end mt-4">
