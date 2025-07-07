@@ -55,7 +55,7 @@
   }
   
   .card {
-    @apply bg-black-900/50 border border-black-800/50 rounded-2xl p-6 shadow-2xl transition-all duration-500 backdrop-blur-sm;
+    @apply bg-slate-900/60 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl transition-all duration-300;
   }
   
   .input-field {
@@ -184,7 +184,7 @@
 }
 
 .card {
-  @apply bg-slate-900/60 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 transform hover:scale-105;
+  @apply bg-slate-900/60 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl transition-all duration-300;
 }
 
 .input-field {
