@@ -35,8 +35,8 @@ Serenade-Ink/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/iadii/Serenade-Ink.git
-cd Serenade-Ink
+git clone https://github.com/iadii/Blog.git
+cd Blog
 ```
 
 ### 2. Backend Setup
