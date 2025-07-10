@@ -23,7 +23,7 @@ A modern, full-stack blog platform for those who write as if serenading the star
 
 ## 🛠️ Project Structure
 ```
-Serenade-Ink/
+Blog/
   backend/      # Express + MongoDB API
   frontend/     # React + Vite + Tailwind UI
   ...           # (this README)
@@ -80,7 +80,7 @@ npm install
 
 ## 🗂️ Folder Structure
 ```
-Serenade-Ink/
+Blog/
   backend/      # Express API, models, routes, controllers
   frontend/     # React app, components, pages, context
 ```
